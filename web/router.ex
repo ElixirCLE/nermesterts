@@ -17,6 +17,7 @@ defmodule Nermesterts.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    post "/", PageController, :post
   end
 
   # Other scopes may use custom stacks.

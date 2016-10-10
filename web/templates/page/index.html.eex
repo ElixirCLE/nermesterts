@@ -1,8 +1,9 @@
 <div class="jumbotron">
   <h2><%= gettext "Welcome to %{name}", name: "NermeSterts!" %></h2>
-  <form method="post" >
-      <label for="number_of_players">Number of Players</label>
-      <input id="number_of_players" type="text"></input>
-      <button type="submit">Submit</button>
-  </form>
+  <%= form_for @conn, "", [as: "player_info"], fn f-> %>
+    <%= label f, :number_of_players %>
+    <%= text_input f, :number_of_players %>
+    <%= submit "Submit" %>
+  <%= end  %>
+  <%= @game %>
 </div>
