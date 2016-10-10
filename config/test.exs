@@ -12,8 +12,8 @@ config :logger, level: :warn
 # Configure your database
 config :nermesterts, Nermesterts.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "admin",
+  password: "",
   database: "nermesterts_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
