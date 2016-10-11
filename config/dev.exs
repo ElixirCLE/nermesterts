@@ -36,7 +36,7 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :nermesterts, Nermesterts.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "admin",
+  username: "postgres",
   password: "",
   database: "nermesterts_dev",
   hostname: "localhost",

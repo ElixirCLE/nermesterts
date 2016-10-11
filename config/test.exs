@@ -12,7 +12,7 @@ config :logger, level: :warn
 # Configure your database
 config :nermesterts, Nermesterts.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "admin",
+  username: "postgres",
   password: "",
   database: "nermesterts_test",
   hostname: "localhost",
