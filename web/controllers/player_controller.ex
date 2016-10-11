@@ -1,12 +1,6 @@
 defmodule Nermesterts.PlayerController do
   use Nermesterts.Web, :controller
-
   alias Nermesterts.Player
-
-  def index(conn, _params) do
-    players = Repo.all(Player)
-    render(conn, "index.html", players: players)
-  end
 
   def new(conn, _params) do
     changeset = Player.changeset(%Player{})
@@ -20,15 +14,10 @@ defmodule Nermesterts.PlayerController do
       {:ok, _player} ->
         conn
         |> put_flash(:info, "Player created successfully.")
-        |> redirect(to: player_path(conn, :index))
+        |> redirect(to: page_path(conn, :index))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
-  end
-
-  def show(conn, %{"id" => id}) do
-    player = Repo.get!(Player, id)
-    render(conn, "show.html", player: player)
   end
 
   def edit(conn, %{"id" => id}) do
@@ -45,7 +34,7 @@ defmodule Nermesterts.PlayerController do
       {:ok, player} ->
         conn
         |> put_flash(:info, "Player updated successfully.")
-        |> redirect(to: player_path(conn, :show, player))
+        |> redirect(to: page_path(conn, :index))
       {:error, changeset} ->
         render(conn, "edit.html", player: player, changeset: changeset)
     end
@@ -60,6 +49,6 @@ defmodule Nermesterts.PlayerController do
 
     conn
     |> put_flash(:info, "Player deleted successfully.")
-    |> redirect(to: player_path(conn, :index))
+    |> redirect(to: page_path(conn, :index))
   end
 end
