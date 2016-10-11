@@ -5,5 +5,5 @@
     <%= text_input f, :number_of_players %>
     <%= submit "Submit" %>
   <%= end  %>
-  <%= @game %>
+  <%= name_of_the(@game) %>
 </div>

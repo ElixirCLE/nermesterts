@@ -6,13 +6,15 @@ defmodule Nermesterts.PageController do
   end
 
   def post(conn, %{"player_info" => info}) do
-    players = String.to_integer(info["number_of_players"])
-    case GamePicker.pick_game(GamePicker.games, players) do
-      %{name: name} ->
-        render conn, "index.html", game: name
-      _ ->
-        render conn, "index.html", game: nil
-    end
+    players = players(info)
+    game = GamePicker.pick_game(GamePicker.games, players)
+    render conn, "index.html", game: game
+  end
 
+  defp players(info) do
+    case Integer.parse(info["number_of_players"]) do
+      { players, _ } -> players
+        _ -> 0
+    end
   end
 end
