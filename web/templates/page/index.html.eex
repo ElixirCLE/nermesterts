@@ -7,3 +7,6 @@
   <%= end  %>
   <%= name_of_the(@game) %>
 </div>
+<div>
+  <%= render Nermesterts.PlayerView, "index.html", players: @players, conn: @conn %>
+</div>

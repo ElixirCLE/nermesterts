@@ -1,14 +1,17 @@
 defmodule Nermesterts.PageController do
   use Nermesterts.Web, :controller
+  alias Nermesterts.Player
 
   def index(conn, _params) do
-    render conn, "index.html", game: nil
+    players = Nermesterts.Repo.all(Player)
+    render conn, "index.html", game: nil, players: players
   end
 
   def post(conn, %{"player_info" => info}) do
-    players = players(info)
-    game = GamePicker.pick_game(GamePicker.games, players)
-    render conn, "index.html", game: game
+    num_players = players(info)
+    game = GamePicker.pick_game(GamePicker.games, num_players)
+    players = Nermesterts.Repo.all(Player)
+    render conn, "index.html", game: game, players: players
   end
 
   defp players(info) do
