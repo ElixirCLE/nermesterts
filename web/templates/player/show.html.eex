@@ -1,0 +1,13 @@
+<h2>Show player</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @player.name %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: player_path(@conn, :edit, @player) %>
+<%= link "Back", to: player_path(@conn, :index) %>

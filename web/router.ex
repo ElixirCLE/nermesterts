@@ -18,6 +18,8 @@ defmodule Nermesterts.Router do
 
     get "/", PageController, :index
     post "/", PageController, :post
+
+    resources "/players", PlayerController
   end
 
   # Other scopes may use custom stacks.
