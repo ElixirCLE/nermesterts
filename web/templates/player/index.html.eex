@@ -14,7 +14,6 @@
       <td><%= player.name %></td>
 
       <td class="text-right">
-        <%= link "Show", to: player_path(@conn, :show, player), class: "btn btn-default btn-xs" %>
         <%= link "Edit", to: player_path(@conn, :edit, player), class: "btn btn-default btn-xs" %>
         <%= link "Delete", to: player_path(@conn, :delete, player), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
       </td>
