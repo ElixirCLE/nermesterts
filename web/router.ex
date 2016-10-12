@@ -19,7 +19,8 @@ defmodule Nermesterts.Router do
     get "/", PageController, :index
     post "/", PageController, :post
 
-    resources "/players", PlayerController
+    resources "/players", PlayerController, except: [:show]
+    resources "/games", GameController, except: [:edit, :update]
   end
 
   # Other scopes may use custom stacks.
