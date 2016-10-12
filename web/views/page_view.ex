@@ -3,7 +3,7 @@ defmodule Nermesterts.PageView do
 
   def name_of_the(game) do
     case game do
-      %{name: name} -> name
+      %{name: name} -> "<h3>" <> name <> "</h3>"
       _ -> ""
     end
   end

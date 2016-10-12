@@ -1,6 +1,7 @@
 <div class="jumbotron">
   <h2><%= gettext "Welcome to %{name}", name: "NermeSterts!" %></h2>
-  The King has decreed that you play <h3><%= name_of_the(@game) %></h3> or face the penalty of death.
+  <%# I'd like to find a better way to do this. I'd like to escape the game name, then wrap it in h3 %>
+  <%= raw(String.replace(@phrase.message, "#GAME#", name_of_the(@game))) %>
 </div>
 <div>
   <%= render Nermesterts.PlayerView, "index.html", players: @players, conn: @conn %>
