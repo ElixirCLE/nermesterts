@@ -13,6 +13,7 @@ install:
   - mix deps.get
 before_script:
   - mix do ecto.create, ecto.migrate
+  - mix run priv/repo/seeds.exs
 script:
   - mix test
 notifications:
