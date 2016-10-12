@@ -16,6 +16,6 @@ defmodule Nermesterts.Game do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:name, :min_players, :max_players, :image])
-    |> validate_required([:name, :min_players, :max_players, :image])
+    |> validate_required([:name, :min_players, :max_players])
   end
 end
