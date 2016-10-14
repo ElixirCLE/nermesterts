@@ -1,6 +1,6 @@
 <div class="jumbotron">
   <h2><%= gettext "Welcome to %{name}", name: "NermeSterts!" %></h2>
-  <%# I'd like to find a better way to do this. I'd like to escape the game name, then wrap it in h3 %>
+  <%# TODO: I'd like to find a better way to do this. I'd like to escape the game name, then wrap it in h3 %>
   <%= raw(selected_game_phrase(@phrase, @game)) %>
 </div>
 <div>
