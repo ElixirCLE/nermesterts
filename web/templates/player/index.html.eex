@@ -1,4 +1,4 @@
-<h2>Listing players</h2>
+<h2>Listing players (<%= length(@players) %>)</h2>
 
 <table class="table">
   <thead>
