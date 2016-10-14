@@ -1,5 +1,4 @@
-<h2>Listing players (<%= length(@players) %>)</h2>
-
+<h2>Active players:</h2>
 <table class="table">
   <thead>
     <tr>
@@ -9,12 +8,37 @@
     </tr>
   </thead>
   <tbody>
-<%= for player <- @players do %>
+<%= for player <- @active_players do %>
     <tr>
       <td><%= player.name %></td>
 
       <td class="text-right">
         <%= link "Edit", to: player_path(@conn, :edit, player), class: "btn btn-default btn-xs" %>
+        <%= link "Deactivate", to: player_path(@conn, :update, player, %{player: %{active: !player.active}}), method: :put, class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: player_path(@conn, :delete, player), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<h2>Inactive players:</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for player <- @inactive_players do %>
+    <tr>
+      <td><%= player.name %></td>
+
+      <td class="text-right">
+        <%= link "Edit", to: player_path(@conn, :edit, player), class: "btn btn-default btn-xs" %>
+        <%= link "Activate", to: player_path(@conn, :update, player, %{player: %{active: !player.active}}), method: :put, class: "btn btn-default btn-xs" %>
         <%= link "Delete", to: player_path(@conn, :delete, player), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
       </td>
     </tr>

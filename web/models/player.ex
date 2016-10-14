@@ -3,6 +3,7 @@ defmodule Nermesterts.Player do
 
   schema "players" do
     field :name, :string
+    field :active, :boolean, default: true
 
     timestamps()
   end
@@ -12,7 +13,7 @@ defmodule Nermesterts.Player do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name])
+    |> cast(params, [:name, :active])
     |> validate_required([:name])
   end
 end
