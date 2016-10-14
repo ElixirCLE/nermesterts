@@ -1,0 +1,6 @@
+<h2>Edit phrase</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: phrase_path(@conn, :update, @phrase) %>
+
+<%= link "Back", to: phrase_path(@conn, :index) %>

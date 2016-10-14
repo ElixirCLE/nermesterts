@@ -1,0 +1,28 @@
+<h2>Listing phrases</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Message</th>
+      <th>Has token</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for phrase <- @phrases do %>
+    <tr>
+      <td><%= phrase.message %></td>
+      <td><%= phrase.has_token %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: phrase_path(@conn, :show, phrase), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: phrase_path(@conn, :edit, phrase), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: phrase_path(@conn, :delete, phrase), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New phrase", to: phrase_path(@conn, :new) %>

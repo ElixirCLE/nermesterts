@@ -21,6 +21,7 @@ defmodule Nermesterts.Router do
 
     resources "/players", PlayerController, except: [:show]
     resources "/games", GameController, except: [:edit, :update]
+    resources "/phrases", PhraseController
   end
 
   # Other scopes may use custom stacks.
