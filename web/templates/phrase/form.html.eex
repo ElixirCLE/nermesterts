@@ -8,13 +8,8 @@
   <div class="form-group">
     <%= label f, :message, class: "control-label" %>
     <%= text_input f, :message, class: "form-control" %>
+    <p class="help-block">Include "#GAME#" for the game's name to show up!</p>
     <%= error_tag f, :message %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :has_token, class: "control-label" %>
-    <%= checkbox f, :has_token, class: "form-control" %>
-    <%= error_tag f, :has_token %>
   </div>
 
   <div class="form-group">

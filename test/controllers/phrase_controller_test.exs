@@ -2,7 +2,7 @@ defmodule Nermesterts.PhraseControllerTest do
   use Nermesterts.ConnCase
 
   alias Nermesterts.Phrase
-  @valid_attrs %{has_token: true, message: "some content"}
+  @valid_attrs %{message: "some content"}
   @invalid_attrs %{}
 
   test "lists all entries on index", %{conn: conn} do
