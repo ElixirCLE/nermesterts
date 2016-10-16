@@ -26,18 +26,6 @@ defmodule Nermesterts.PhraseControllerTest do
     assert html_response(conn, 200) =~ "New phrase"
   end
 
-  test "shows chosen resource", %{conn: conn} do
-    phrase = Repo.insert! %Phrase{}
-    conn = get conn, phrase_path(conn, :show, phrase)
-    assert html_response(conn, 200) =~ "Show phrase"
-  end
-
-  test "renders page not found when id is nonexistent", %{conn: conn} do
-    assert_error_sent 404, fn ->
-      get conn, phrase_path(conn, :show, -1)
-    end
-  end
-
   test "renders form for editing chosen resource", %{conn: conn} do
     phrase = Repo.insert! %Phrase{}
     conn = get conn, phrase_path(conn, :edit, phrase)
@@ -47,7 +35,7 @@ defmodule Nermesterts.PhraseControllerTest do
   test "updates chosen resource and redirects when data is valid", %{conn: conn} do
     phrase = Repo.insert! %Phrase{}
     conn = put conn, phrase_path(conn, :update, phrase), phrase: @valid_attrs
-    assert redirected_to(conn) == phrase_path(conn, :show, phrase)
+    assert redirected_to(conn) == phrase_path(conn, :index)
     assert Repo.get_by(Phrase, @valid_attrs)
   end
 

@@ -26,11 +26,6 @@ defmodule Nermesterts.PhraseController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    phrase = Repo.get!(Phrase, id)
-    render(conn, "show.html", phrase: phrase)
-  end
-
   def edit(conn, %{"id" => id}) do
     phrase = Repo.get!(Phrase, id)
     changeset = Phrase.changeset(phrase)
@@ -45,7 +40,7 @@ defmodule Nermesterts.PhraseController do
       {:ok, phrase} ->
         conn
         |> put_flash(:info, "Phrase updated successfully.")
-        |> redirect(to: phrase_path(conn, :show, phrase))
+        |> redirect(to: phrase_path(conn, :index))
       {:error, changeset} ->
         render(conn, "edit.html", phrase: phrase, changeset: changeset)
     end
