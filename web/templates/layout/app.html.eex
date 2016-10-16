@@ -15,7 +15,10 @@
     <div class="container">
       <header class="header">
         <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
+          <ul class="nav nav-pills">
+            <li role="presentation"><%= link "Home", to: page_path(@conn, :index)%></li>
+            <li role="presentation"><%= link "Phrases", to: phrase_path(@conn, :index)%></li>
+            <li role="presentation"><%= link "Games", to: game_path(@conn, :index)%></li>
           </ul>
         </nav>
       </header>
