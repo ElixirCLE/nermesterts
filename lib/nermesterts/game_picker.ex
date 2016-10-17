@@ -26,6 +26,8 @@ defmodule GamePicker do
       nil
   """
   def pick_game(games_list, num_players) do
+    :rand.seed(:exsplus, DateTime.utc_now |> DateTime.to_date |> Date.to_erl)
+
     games_list
     |> filter_min_players(num_players)
     |> filter_max_players(num_players)
