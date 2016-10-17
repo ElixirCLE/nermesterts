@@ -1,4 +1,5 @@
 defmodule GamePicker do
+  alias Nermesterts.Game
   @moduledoc """
   Choose a game that matches criteria
 
@@ -68,6 +69,15 @@ defmodule GamePicker do
       [%Game{name: "Game1", min_players: 2, max_players: 4}, %Game{name: "Game2", min_players: 3, max_players: 5}]
   """
   def filter_max_players(games_list, num_players) do
-    Enum.filter(games_list, fn(game) -> Map.get(game, :max_players) >= num_players end)
+    games_list
+    |> Enum.filter(fn(game) -> game_within_max_boundry(game, num_players) end)
+  end
+
+  def game_within_max_boundry(%Game{max_players: 0}, _) do
+    true
+  end
+
+  def game_within_max_boundry(game, num_players) do
+    Map.get(game, :max_players) >= num_players
   end
 end
