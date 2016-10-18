@@ -57,6 +57,11 @@ defmodule Nermesterts.GamePicker do
   Returns a filtered list of `%Game{}`s.
 
   ## Examples
+      iex> games = [%Nermesterts.Game{name: "Game1", min_players: 2, max_players: 0},
+      ...> %Nermesterts.Game{name: "Game2", min_players: 3, max_players: 2}]
+      iex> Nermesterts.GamePicker.filter_max_players(games, 5)
+      [%Nermesterts.Game{name: "Game1", min_players: 2, max_players: 0}]
+
       iex> games = [%Nermesterts.Game{name: "Game1", min_players: 2, max_players: 4},
       ...> %Nermesterts.Game{name: "Game2", min_players: 3, max_players: 5}]
       iex> Nermesterts.GamePicker.filter_max_players(games, 5)
