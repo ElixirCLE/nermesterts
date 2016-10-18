@@ -77,11 +77,11 @@ defmodule Nermesterts.GamePicker do
     |> Enum.filter(fn(game) -> game_within_max_boundry(game, num_players) end)
   end
 
-  def game_within_max_boundry(%{max_players: 0}, _) do
+  defp game_within_max_boundry(%{max_players: 0}, _) do
     true
   end
 
-  def game_within_max_boundry(game, num_players) do
+  defp game_within_max_boundry(game, num_players) do
     Map.get(game, :max_players) >= num_players
   end
 end
