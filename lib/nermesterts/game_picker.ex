@@ -11,7 +11,7 @@ defmodule GamePicker do
   """
 
   @doc """
-  Picks a random game from the list.
+  Picks a random game from the list. By default, the randomizer is seeded with the current date
   Returns a `%Game{}` where min_players <= num_players <= max_players.
 
   ## Examples
@@ -25,12 +25,11 @@ defmodule GamePicker do
       iex> GamePicker.pick_game(games, 1)
       nil
   """
-  def pick_game(games_list, num_players) do
+  def pick_game(games_list, num_players, randomizer \\ GamePicker.Randomizer) do
     games_list
     |> filter_min_players(num_players)
     |> filter_max_players(num_players)
-    |> Enum.take_random(1)
-    |> List.first
+    |> randomizer.randomize
   end
 
   @doc """
