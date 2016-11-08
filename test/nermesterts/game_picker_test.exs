@@ -1,8 +1,9 @@
 defmodule GamePickerTest do
   use ExUnit.Case
+  doctest Nermesterts.GamePicker
 
   alias Nermesterts.Game
-  alias GamePicker
+  alias Nermesterts.GamePicker
 
   test "game selection is consistent when the day and number of players are the same" do
     games = [%Game{name: "Game1", min_players: 2, max_players: 4},
