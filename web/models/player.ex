@@ -1,6 +1,9 @@
 defmodule Nermesterts.Player do
   use Nermesterts.Web, :model
 
+  @required_fields ~w(name)
+  @optional_fields ~w(active)
+
   schema "players" do
     field :name, :string
     field :active, :boolean, default: true
@@ -13,7 +16,6 @@ defmodule Nermesterts.Player do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :active])
-    |> validate_required([:name])
+    |> cast(params, @required_fields, @optional_fields)
   end
 end
