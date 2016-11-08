@@ -18,4 +18,20 @@ defmodule Nermesterts.Player do
     struct
     |> cast(params, @required_fields, @optional_fields)
   end
+
+  @doc """
+  Creates a query that orders players by name.
+  """
+  def ordered(query) do
+    from p in query,
+      order_by: p.name
+  end
+
+  @doc """
+  Returns a query that gets all players whose active flag matches the passed in value.
+  """
+  def active(query, active) do
+    from p in query,
+      where: p.active == ^active
+  end
 end

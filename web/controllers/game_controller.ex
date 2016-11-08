@@ -4,7 +4,7 @@ defmodule Nermesterts.GameController do
   alias Nermesterts.Game
 
   def index(conn, _params) do
-    games = Repo.all(Game)
+    games = Game |> Game.ordered |> Repo.all
     render(conn, "index.html", games: games)
   end
 

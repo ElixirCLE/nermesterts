@@ -6,15 +6,15 @@ defmodule Nermesterts.PageController do
   alias Nermesterts.GamePicker
 
   def index(conn, _params) do
-    games = Nermesterts.Repo.all(Game)
-    active_players = Nermesterts.Repo.all(from p in Player, where: p.active == true)
-    inactive_players = Nermesterts.Repo.all(from p in Player, where: p.active == false)
+    games = Repo.all(Game)
+    active_players = Player |> Player.active(true) |> Player.ordered |> Repo.all
+    inactive_players = Player |> Player.active(false) |> Player.ordered |> Repo.all
     num_players = length(active_players)
 
     game = GamePicker.pick_game(games, num_players)
     game_is_nil = is_nil(game)
 
-    phrase = Nermesterts.Repo.all(from p in Phrase, where: p.has_token == not(^game_is_nil))
+    phrase = Repo.all(from p in Phrase, where: p.has_token == not(^game_is_nil))
     |> Enum.take_random(1)
     |> List.first
 

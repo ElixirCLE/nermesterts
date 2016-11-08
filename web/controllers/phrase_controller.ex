@@ -4,7 +4,7 @@ defmodule Nermesterts.PhraseController do
   alias Nermesterts.Phrase
 
   def index(conn, _params) do
-    phrases = Repo.all(Phrase)
+    phrases = Phrase |> Phrase.ordered |> Repo.all
     render(conn, "index.html", phrases: phrases)
   end
 

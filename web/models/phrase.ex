@@ -18,6 +18,14 @@ defmodule Nermesterts.Phrase do
     |> validate_required([:message, :has_token])
   end
 
+  @doc """
+  Creates a query that orders phrases by message.
+  """
+  def ordered(query) do
+    from p in query,
+      order_by: p.message
+  end
+
   defp generate_has_token(changeset = %{changes: %{message: message}}) do
     changeset
     |> put_change(:has_token, String.contains?(message, "#GAME#"))
