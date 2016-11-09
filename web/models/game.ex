@@ -19,6 +19,7 @@ defmodule Nermesterts.Game do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, @required_fields, @optional_fields)
+    |> unique_constraint(:name)
     |> validate_number(:min_players, greater_than: 0)
     |> validate_min_max_players
   end
