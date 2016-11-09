@@ -17,6 +17,7 @@ defmodule Nermesterts.Player do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, @required_fields, @optional_fields)
+    |> unique_constraint(:name)
   end
 
   @doc """
