@@ -17,11 +17,16 @@ defmodule Nermesterts.Game do
   Builds a changeset based on the `struct` and `params`.
   """
   def changeset(struct, params \\ %{}) do
-    struct
+    changeset = struct
     |> cast(params, @required_fields, @optional_fields)
-    |> unique_constraint(:name)
+
+    # Pulled this out so that we can access the changes map
+    changeset
     |> validate_number(:min_players, greater_than: 0)
-    |> validate_min_max_players
+    |> validate_number(:min_players,
+                       less_than_or_equal_to: Map.get(changeset.changes, :max_players),
+                       message: "Min players must be less than or equal to the max players.")
+    |> unique_constraint(:name)
   end
 
   @doc """
@@ -31,14 +36,4 @@ defmodule Nermesterts.Game do
     from g in query,
       order_by: g.name
   end
-
-  defp validate_min_max_players(changeset) do
-    min = Map.get(changeset.changes, :min_players)
-    max = Map.get(changeset.changes, :max_players)
-    validate_min_max_players(changeset, min, max)
-  end
-  defp validate_min_max_players(changeset, min, max) when min > max do
-    add_error(changeset, :min_players, "Min players must be less than or equal to the max players.")
-  end
-  defp validate_min_max_players(changeset, _, _), do: changeset
 end
