@@ -10,7 +10,7 @@ defmodule Nermesterts.Game do
     timestamps()
   end
 
-  @required_fields ~w(name, min_playrs, max_players)
+  @required_fields ~w(name min_players max_players)
   @optional_fields ~w(image)
 
   @doc """
@@ -19,6 +19,8 @@ defmodule Nermesterts.Game do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, @required_fields, @optional_fields)
+    |> validate_number(:min_players, greater_than: 0)
+    |> validate_min_max_players
   end
 
   @doc """
@@ -28,4 +30,14 @@ defmodule Nermesterts.Game do
     from g in query,
       order_by: g.name
   end
+
+  defp validate_min_max_players(changeset) do
+    min = Map.get(changeset.changes, :min_players)
+    max = Map.get(changeset.changes, :max_players)
+    validate_min_max_players(changeset, min, max)
+  end
+  defp validate_min_max_players(changeset, min, max) when min > max do
+    add_error(changeset, :min_players, "Min players must be less than or equal to the max players.")
+  end
+  defp validate_min_max_players(changeset, _, _), do: changeset
 end
