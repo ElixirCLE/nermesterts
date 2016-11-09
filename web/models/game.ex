@@ -10,13 +10,15 @@ defmodule Nermesterts.Game do
     timestamps()
   end
 
+  @required_fields ~w(name, min_playrs, max_players)
+  @optional_fields ~w(image)
+
   @doc """
   Builds a changeset based on the `struct` and `params`.
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :min_players, :max_players, :image])
-    |> validate_required([:name, :min_players, :max_players])
+    |> cast(params, @required_fields, @optional_fields)
   end
 
   @doc """
