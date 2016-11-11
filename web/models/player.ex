@@ -9,7 +9,7 @@ defmodule Nermesterts.Player do
     field :crypted_password, :string
     field :plain_password, :string, virtual: true
     field :name, :string
-    field :active, :boolean, default: true
+    field :active, :boolean, default: false
 
     timestamps()
   end
