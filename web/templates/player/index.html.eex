@@ -10,7 +10,7 @@
   <tbody>
 <%= for player <- @active_players do %>
     <tr>
-      <td><%= player.name %></td>
+      <td><%= player.name || player.username %></td>
 
       <td class="text-right">
         <%= link "Edit", to: player_path(@conn, :edit, player), class: "btn btn-default btn-xs" %>
@@ -34,7 +34,7 @@
   <tbody>
 <%= for player <- @inactive_players do %>
     <tr>
-      <td><%= player.name %></td>
+      <td><%= player.name || player.username %></td>
 
       <td class="text-right">
         <%= link "Edit", to: player_path(@conn, :edit, player), class: "btn btn-default btn-xs" %>
