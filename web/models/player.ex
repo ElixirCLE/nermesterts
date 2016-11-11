@@ -1,14 +1,23 @@
 defmodule Nermesterts.Player do
   use Nermesterts.Web, :model
 
-  @required_fields ~w(name)
-  @optional_fields ~w(active)
+  @required_fields ~w(username plain_password)
+  @optional_fields ~w(name active)
 
   schema "players" do
+    field :username, :string
+    field :crypted_password, :string
+    field :plain_password, :string, virtual: true
     field :name, :string
     field :active, :boolean, default: true
 
     timestamps()
+  end
+
+  def create(changeset, repo) do
+    changeset
+    |> put_change(:crypted_password, hashed_password(changeset.params["password"]))
+    |> repo.insert
   end
 
   @doc """
@@ -17,7 +26,8 @@ defmodule Nermesterts.Player do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, @required_fields, @optional_fields)
-    |> unique_constraint(:name)
+    |> unique_constraint(:username)
+    |> validate_length(:plain_password, min: 5)
   end
 
   @doc """
@@ -34,5 +44,9 @@ defmodule Nermesterts.Player do
   def active(query, active) do
     from p in query,
       where: p.active == ^active
+  end
+
+  defp hashed_password(password) do
+    Comeonin.Bcrypt.hashpwsalt(password)
   end
 end

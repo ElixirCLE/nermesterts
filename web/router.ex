@@ -19,6 +19,8 @@ defmodule Nermesterts.Router do
     get "/", PageController, :index
     post "/", PageController, :post
 
+    resources "/registrations", RegistrationController, only: [:new, :create]
+
     put "/players/deactivate", PlayerController, :deactivate_all, as: :player_deactivate_all
     resources "/players", PlayerController, except: [:show] do
       put "/activate", PlayerController, :activate, as: :activate
