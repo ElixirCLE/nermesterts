@@ -45,4 +45,3 @@
   </tbody>
 </table>
 
-<%= link "New player", to: player_path(@conn, :new) %>
