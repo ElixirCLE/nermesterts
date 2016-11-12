@@ -14,7 +14,9 @@
 
       <td class="text-right">
         <%= if logged_in?(@conn) do %>
-          <%= link "Edit", to: player_path(@conn, :edit, player), class: "btn btn-default btn-xs" %>
+          <%= if player.username == current_user(@conn).username do %>
+            <%= link "Edit", to: player_path(@conn, :edit, player), class: "btn btn-default btn-xs" %>
+          <% end %>
           <%= link "Deactivate", to: player_deactivate_path(@conn, :deactivate, player), method: :put, class: "btn btn-default btn-xs" %>
         <% end %>
       </td>
@@ -42,7 +44,9 @@
 
       <td class="text-right">
         <%= if logged_in?(@conn) do %>
-          <%= link "Edit", to: player_path(@conn, :edit, player), class: "btn btn-default btn-xs" %>
+          <%= if player.username == current_user(@conn).username do %>
+            <%= link "Edit", to: player_path(@conn, :edit, player), class: "btn btn-default btn-xs" %>
+          <% end %>
           <%= link "Activate", to: player_activate_path(@conn, :activate, player), method: :put, class: "btn btn-default btn-xs" %>
         <% end %>
       </td>
