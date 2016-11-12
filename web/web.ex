@@ -52,6 +52,8 @@ defmodule Nermesterts.Web do
       import Nermesterts.Router.Helpers
       import Nermesterts.ErrorHelpers
       import Nermesterts.Gettext
+
+      import Nermesterts.Session, only: [current_user: 1, logged_in?: 1]
     end
   end
 

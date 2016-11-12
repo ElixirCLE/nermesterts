@@ -21,6 +21,9 @@ defmodule Nermesterts.Router do
 
     resources "/registrations", RegistrationController, only: [:new, :create]
 
+    resources "/login", SessionController, only: [:new, :create]
+    delete "/logout", SessionController, :delete
+
     put "/players/deactivate", PlayerController, :deactivate_all, as: :player_deactivate_all
     resources "/players", PlayerController, except: [:show] do
       put "/activate", PlayerController, :activate, as: :activate

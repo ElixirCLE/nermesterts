@@ -12,7 +12,7 @@ defmodule Nermesterts.RegistrationController do
     changeset = Player.changeset(%Player{}, player_params)
 
     case Nermesterts.Player.create(changeset, Nermesterts.Repo) do
-      {:ok, changeset} ->
+      {:ok, _changeset} ->
         # sign in
         conn
         |> put_flash(:info, "Your account was created")

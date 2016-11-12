@@ -1,1 +1,13 @@
 /* This file is for your main application css. */
+.dropdown-menu>li>form>a {
+  display: block;
+  padding: 3px 20px;
+  color: #333333;
+  white-space: nowrap;
+}
+
+.dropdown-menu>li>form>a:focus, .dropdown-menu>li>form>a:hover {
+  color: #262626;
+  text-decoration: none;
+  background-color: #f5f5f5;
+}

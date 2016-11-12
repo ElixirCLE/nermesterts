@@ -26,7 +26,7 @@ defmodule Nermesterts.Player do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, @required_fields, @optional_fields)
-    |> unique_constraint(:username)
+    |> unique_constraint(:username, downcase: true)
     |> validate_length(:plain_password, min: 5)
   end
 
