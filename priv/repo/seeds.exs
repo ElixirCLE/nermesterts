@@ -40,7 +40,7 @@ Nermesterts.Repo.insert!(%Game{name: "Tsuro", min_players: 2, max_players: 8})
 Nermesterts.Repo.insert!(%Game{name: "Zombie Dice", min_players: 2, max_players: 99})
 
 Nermesterts.Repo.insert!(%Phrase{message: "The King has decreed that you play #GAME# or face the penalty of death!", has_token: true})
-Nermesterts.Repo.insert!(%Phrase{message: "A shady figure approaches you. \"Psst. Hey, kid. Why don't you come check out #GAME#?", has_token: true})
+Nermesterts.Repo.insert!(%Phrase{message: "A shady figure approaches you. \"Psst. Hey, kid. Why don't you come check out #GAME#?\"", has_token: true})
 Nermesterts.Repo.insert!(%Phrase{message: "#GAME# is the kind of game you can take home to Mom.", has_token: true})
 Nermesterts.Repo.insert!(%Phrase{message: "You think you see a game off in the distance, but as you approach you realize it was just a mirage.", has_token: false})
 Nermesterts.Repo.insert!(%Phrase{message: "I walk this empty street / On the Boulevard of Broken Dreams / Where the city sleeps / And I'm the only one and I walk alone", has_token: false})
