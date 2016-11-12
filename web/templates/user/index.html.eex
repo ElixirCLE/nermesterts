@@ -8,16 +8,16 @@
     </tr>
   </thead>
   <tbody>
-<%= for player <- @active_players do %>
+<%= for user <- @active_players do %>
     <tr>
-      <td><%= player.name || player.username %></td>
+      <td><%= user.name || user.username %></td>
 
       <td class="text-right">
         <%= if logged_in?(@conn) do %>
-          <%= if player.username == current_user(@conn).username do %>
-            <%= link "Edit", to: player_path(@conn, :edit, player), class: "btn btn-default btn-xs" %>
+          <%= if user.username == current_user(@conn).username do %>
+            <%= link "Edit", to: user_path(@conn, :edit, user), class: "btn btn-default btn-xs" %>
           <% end %>
-          <%= link "Deactivate", to: player_deactivate_path(@conn, :deactivate, player), method: :put, class: "btn btn-default btn-xs" %>
+          <%= link "Deactivate", to: player_deactivate_path(@conn, :deactivate, user), method: :put, class: "btn btn-default btn-xs" %>
         <% end %>
       </td>
     </tr>
@@ -38,16 +38,16 @@
     </tr>
   </thead>
   <tbody>
-<%= for player <- @inactive_players do %>
+<%= for user <- @inactive_players do %>
     <tr>
-      <td><%= player.name || player.username %></td>
+      <td><%= user.name || user.username %></td>
 
       <td class="text-right">
         <%= if logged_in?(@conn) do %>
-          <%= if player.username == current_user(@conn).username do %>
-            <%= link "Edit", to: player_path(@conn, :edit, player), class: "btn btn-default btn-xs" %>
+          <%= if user.username == current_user(@conn).username do %>
+            <%= link "Edit", to: user_path(@conn, :edit, user), class: "btn btn-default btn-xs" %>
           <% end %>
-          <%= link "Activate", to: player_activate_path(@conn, :activate, player), method: :put, class: "btn btn-default btn-xs" %>
+          <%= link "Activate", to: player_activate_path(@conn, :activate, user), method: :put, class: "btn btn-default btn-xs" %>
         <% end %>
       </td>
     </tr>

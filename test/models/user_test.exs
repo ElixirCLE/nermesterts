@@ -1,18 +1,18 @@
-defmodule Nermesterts.PlayerTest do
+defmodule Nermesterts.UserTest do
   use Nermesterts.ModelCase
 
-  alias Nermesterts.Player
+  alias Nermesterts.User
 
   @valid_attrs %{name: "some content"}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
-    changeset = Player.changeset(%Player{}, @valid_attrs)
+    changeset = User.changeset(%User{}, @valid_attrs)
     assert changeset.valid?
   end
 
   test "changeset with invalid attributes" do
-    changeset = Player.changeset(%Player{}, @invalid_attrs)
+    changeset = User.changeset(%User{}, @invalid_attrs)
     refute changeset.valid?
   end
 end

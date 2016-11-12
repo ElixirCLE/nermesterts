@@ -2,13 +2,13 @@ defmodule Nermesterts.PageController do
   use Nermesterts.Web, :controller
   alias Nermesterts.Game
   alias Nermesterts.Phrase
-  alias Nermesterts.Player
+  alias Nermesterts.User
   alias Nermesterts.GamePicker
 
   def index(conn, _params) do
     games = Repo.all(Game)
-    active_players = Player |> Player.active(true) |> Player.ordered |> Repo.all
-    inactive_players = Player |> Player.active(false) |> Player.ordered |> Repo.all
+    active_players = User |> User.active(true) |> User.ordered |> Repo.all
+    inactive_players = User |> User.active(false) |> User.ordered |> Repo.all
     num_players = length(active_players)
 
     game = GamePicker.pick_game(games, num_players)

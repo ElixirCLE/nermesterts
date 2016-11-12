@@ -1,8 +1,8 @@
 defmodule Nermesterts.Session do
-  alias Nermesterts.Player
+  alias Nermesterts.User
 
   def login(params, repo) do
-    user = repo.get_by(Player, username: String.downcase(params["username"]))
+    user = repo.get_by(User, username: String.downcase(params["username"]))
     case authenticate(user, params["password"]) do
       true -> {:ok, user}
       _ -> :error
@@ -11,7 +11,7 @@ defmodule Nermesterts.Session do
 
   def current_user(conn) do
     id = Plug.Conn.get_session(conn, :current_user)
-    if id, do: Nermesterts.Repo.get(Player, id)
+    if id, do: Nermesterts.Repo.get(User, id)
   end
 
   def current_user_name(conn) do

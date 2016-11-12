@@ -1,10 +1,10 @@
-defmodule Nermesterts.Player do
+defmodule Nermesterts.User do
   use Nermesterts.Web, :model
 
   @required_fields ~w(username)
   @optional_fields ~w(name active)
 
-  schema "players" do
+  schema "users" do
     field :username, :string
     field :crypted_password, :string
     field :password, :string, virtual: true
@@ -33,19 +33,19 @@ defmodule Nermesterts.Player do
   end
 
   @doc """
-  Creates a query that orders players by name.
+  Creates a query that orders users by name.
   """
   def ordered(query) do
-    from p in query,
-      order_by: p.name
+    from u in query,
+      order_by: u.name
   end
 
   @doc """
-  Returns a query that gets all players whose active flag matches the passed in value.
+  Returns a query that gets all users whose active flag matches the passed in value.
   """
   def active(query, active) do
-    from p in query,
-      where: p.active == ^active
+    from u in query,
+      where: u.active == ^active
   end
 
   defp put_encrypted_pass(changeset) do

@@ -4,5 +4,5 @@
   <%= raw(selected_game_phrase(@phrase, @game)) %>
 </div>
 <div>
-  <%= render Nermesterts.PlayerView, "index.html", active_players: @active_players, inactive_players: @inactive_players, conn: @conn %>
+  <%= render Nermesterts.UserView, "index.html", active_players: @active_players, inactive_players: @inactive_players, conn: @conn %>
 </div>

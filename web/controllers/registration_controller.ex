@@ -1,15 +1,15 @@
 defmodule Nermesterts.RegistrationController do
   use Nermesterts.Web, :controller
 
-  alias Nermesterts.Player
+  alias Nermesterts.User
 
   def new(conn, _params) do
-    changeset = Player.changeset(%Player{})
+    changeset = User.changeset(%User{})
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, %{"player" => player_params}) do
-    changeset = Player.registration_changeset(%Player{}, player_params)
+  def create(conn, %{"user" => user_params}) do
+    changeset = User.registration_changeset(%User{}, user_params)
 
     case Repo.insert(changeset) do
       {:ok, changeset} ->
