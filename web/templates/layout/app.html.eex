@@ -20,12 +20,12 @@
             <li role="presentation"><%= link "Phrases", to: phrase_path(@conn, :index)%></li>
             <li role="presentation"><%= link "Games", to: game_path(@conn, :index)%></li>
             <li class="dropdown" role="presentation">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Guest <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <%= current_user_name(@conn) %> <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <%= if logged_in?(@conn) do %>
-                  <li><%= link "Logout", to: session_path(@conn, :delete) %></li>
+                  <li><%= link "Log Out", to: session_path(@conn, :delete), method: "delete" %></li>
                 <% else %>
-                  <li><%= link "Login", to: session_path(@conn, :new) %></li>
+                  <li><%= link "Log In", to: session_path(@conn, :new) %></li>
                   <li><%= link "Register", to: registration_path(@conn, :new) %></li>
                 <% end %>
               </ul>

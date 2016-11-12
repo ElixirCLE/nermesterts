@@ -1,33 +1,35 @@
 defmodule Nermesterts.Player do
   use Nermesterts.Web, :model
 
-  @required_fields ~w(username plain_password)
+  @required_fields ~w(username)
   @optional_fields ~w(name active)
 
   schema "players" do
     field :username, :string
     field :crypted_password, :string
-    field :plain_password, :string, virtual: true
+    field :password, :string, virtual: true
     field :name, :string
     field :active, :boolean, default: false
 
     timestamps()
   end
 
-  def create(changeset, repo) do
-    changeset
-    |> put_change(:crypted_password, hashed_password(changeset.params["password"]))
-    |> repo.insert
+  def registration_changeset(struct, params) do
+    struct
+    |> changeset(params)
+    |> cast(params, ~w(password), [])
+    |> validate_length(:password, min: 6)
+    |> put_encrypted_pass
   end
 
   @doc """
   Builds a changeset based on the `struct` and `params`.
   """
-  def changeset(struct, params \\ %{}) do
+  def changeset(struct, params \\ :empty) do
     struct
     |> cast(params, @required_fields, @optional_fields)
+    |> validate_length(:usernme, min: 3, max: 20)
     |> unique_constraint(:username, downcase: true)
-    |> validate_length(:plain_password, min: 5)
   end
 
   @doc """
@@ -46,7 +48,12 @@ defmodule Nermesterts.Player do
       where: p.active == ^active
   end
 
-  defp hashed_password(password) do
-    Comeonin.Bcrypt.hashpwsalt(password)
+  defp put_encrypted_pass(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true, changes: %{password: pass}} ->
+        put_change(changeset, :crypted_password, Comeonin.Bcrypt.hashpwsalt(pass))
+      _ ->
+        changeset
+    end
   end
 end

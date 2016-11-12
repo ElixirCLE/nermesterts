@@ -11,11 +11,18 @@ defmodule Nermesterts.SessionController do
         conn
         |> put_session(:current_user, user.id)
         |> put_flash(:info, "Logged in")
-        |> redirect(to: "/")
+        |> redirect(to: page_path(conn, :index))
       :error ->
         conn
         |> put_flash(:indo, "Wrong username or password")
         |> render("new.html")
     end
+  end
+
+  def delete(conn, _) do
+    conn
+    |> delete_session(:current_user)
+    |> put_flash(:info, "Logged out")
+    |> redirect(to: "/")
   end
 end
