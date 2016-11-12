@@ -8,6 +8,7 @@ defmodule Nermesterts.User do
     field :username, :string
     field :crypted_password, :string
     field :password, :string, virtual: true
+    field :password_confirmation, :string, virtual: true
     field :name, :string
     field :active, :boolean, default: false
 
@@ -17,8 +18,9 @@ defmodule Nermesterts.User do
   def registration_changeset(struct, params) do
     struct
     |> changeset(params)
-    |> cast(params, ~w(password), [])
+    |> cast(params, ~w(password password_confirmation), [])
     |> validate_length(:password, min: 6)
+    |> validate_confirmation(:password)
     |> put_encrypted_pass
   end
 
@@ -28,7 +30,7 @@ defmodule Nermesterts.User do
   def changeset(struct, params \\ :empty) do
     struct
     |> cast(params, @required_fields, @optional_fields)
-    |> validate_length(:usernme, min: 3, max: 20)
+    |> validate_length(:username, min: 3, max: 20)
     |> unique_constraint(:username, downcase: true)
   end
 

@@ -26,6 +26,12 @@
   </div>
 
   <div class="form-group">
+    <label>Passowrd Confirmation</label>
+    <%= password_input f, :password_confirmation, class: "form-control" %>
+    <%= error_tag f, :password_confirmation %>
+  </div>
+
+  <div class="form-group">
     <%= submit "Sign Up", class: "btn btn-primary" %>
   </div>
 <% end %>
