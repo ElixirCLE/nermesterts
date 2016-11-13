@@ -3,7 +3,7 @@ defmodule Nermesterts.UserTest do
 
   alias Nermesterts.User
 
-  @valid_attrs %{name: "some content"}
+  @valid_attrs %{username: "foo", password: "bar", password_confirmation: "bar", name: "some content"}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
