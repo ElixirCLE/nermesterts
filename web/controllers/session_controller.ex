@@ -1,6 +1,8 @@
 defmodule Nermesterts.SessionController do
   use Nermesterts.Web, :controller
 
+  plug :scrub_params, "session" when action in [:create]
+
   def new(conn, _params) do
     render(conn, "new.html")
   end
