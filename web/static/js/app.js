@@ -19,3 +19,12 @@ import "phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 // import socket from "./socket"
+
+
+// Required for Bootstrap dropdowns to work
+import $ from "jquery"
+global.jQuery = require("jquery")
+global.bootstrap = require("bootstrap")
+
+// Allows delete links to work in Bootstrap dropdowns
+$(document).off('click.bs.dropdown.data-api', '.dropdown form');

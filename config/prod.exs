@@ -25,6 +25,9 @@ config :nermesterts, Nermesterts.Repo,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
   ssl: true
 
+config :comeonin,
+  bcrypt_log_rounds: 14
+
 # Do not print debug messages in production
 config :logger, level: :info
 

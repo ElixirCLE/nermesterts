@@ -14,8 +14,10 @@
       <td><%= phrase.message %></td>
 
       <td class="text-right">
-        <%= link "Edit", to: phrase_path(@conn, :edit, phrase), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: phrase_path(@conn, :delete, phrase), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <%= if logged_in?(@conn) do %>
+          <%= link "Edit", to: phrase_path(@conn, :edit, phrase), class: "btn btn-default btn-xs" %>
+          <%= link "Delete", to: phrase_path(@conn, :delete, phrase), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <% end %>
       </td>
     </tr>
 <% end %>
