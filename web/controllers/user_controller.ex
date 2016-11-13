@@ -30,7 +30,7 @@ defmodule Nermesterts.UserController do
     Repo.delete!(user)
 
     conn
-    |> put_flash(:info, "User deleted successfully.")
+    |> put_flash(:error, "User deleted successfully.")
     |> redirect(to: page_path(conn, :index))
   end
 end

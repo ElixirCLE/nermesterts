@@ -14,7 +14,7 @@ defmodule Nermesterts.SessionController do
         |> redirect(to: page_path(conn, :index))
       :error ->
         conn
-        |> put_flash(:indo, "Wrong username or password")
+        |> put_flash(:error, "Wrong username or password")
         |> render("new.html")
     end
   end

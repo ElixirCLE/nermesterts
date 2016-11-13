@@ -28,7 +28,7 @@ defmodule Nermesterts.PlayerController do
         |> redirect(to: page_path(conn, :index))
       {:error, _changeset} ->
         conn
-        |> put_flash(:info, "There was an error while trying to update the player(s)")
+        |> put_flash(:error, "There was an error while trying to update the player(s)")
         |> redirect(to: page_path(conn, :index))
     end
   end

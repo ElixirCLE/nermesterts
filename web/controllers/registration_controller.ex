@@ -1,7 +1,8 @@
 defmodule Nermesterts.RegistrationController do
   use Nermesterts.Web, :controller
-
   alias Nermesterts.User
+
+  plug :scrub_params, "user" when action in [:create]
 
   def new(conn, _params) do
     changeset = User.changeset(%User{})
@@ -21,7 +22,6 @@ defmodule Nermesterts.RegistrationController do
       {:error, changeset} ->
         # show error
         conn
-        |> put_flash(:info, "Unable to create account")
         |> render("new.html", changeset: changeset)
     end
   end
