@@ -37,7 +37,7 @@ defmodule Nermesterts.PhraseController do
     changeset = Phrase.changeset(phrase, phrase_params)
 
     case Repo.update(changeset) do
-      {:ok, phrase} ->
+      {:ok, _phrase} ->
         conn
         |> put_flash(:info, "Phrase updated successfully.")
         |> redirect(to: phrase_path(conn, :index))

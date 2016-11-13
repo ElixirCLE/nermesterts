@@ -1,7 +1,7 @@
 defmodule Nermesterts.UserControllerTest do
   use Nermesterts.ConnCase
-
   alias Nermesterts.User
+
   @valid_attrs %{username: "foo"}
   @valid_create_attrs %{username: "foo", password: "barbaz", password_confirmation: "barbaz"}
   @invalid_attrs %{}
