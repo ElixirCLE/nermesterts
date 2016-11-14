@@ -26,6 +26,7 @@ defmodule Nermesterts.Router do
 
     resources "/user", UserController, only: [:edit, :update, :delete]
 
+    post "/players/guest", PlayerController, :add_guest, as: :add_guest
     put "/players/deactivate", PlayerController, :deactivate_all, as: :player_deactivate_all
     resources "/players", PlayerController, except: [:new, :create, :show] do
       put "/activate", PlayerController, :activate, as: :activate
