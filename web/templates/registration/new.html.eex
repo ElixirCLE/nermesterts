@@ -26,7 +26,7 @@
   </div>
 
   <div class="form-group">
-    <label>Passowrd Confirmation</label>
+    <label>Password Confirmation</label>
     <%= password_input f, :password_confirmation, class: "form-control" %>
     <%= error_tag f, :password_confirmation %>
   </div>
