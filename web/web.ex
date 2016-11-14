@@ -54,6 +54,8 @@ defmodule Nermesterts.Web do
       import Nermesterts.Gettext
 
       import Nermesterts.Session, only: [current_user: 1, current_user_name: 1, logged_in?: 1]
+
+      alias Nermesterts.User
     end
   end
 

@@ -34,6 +34,16 @@ defmodule Nermesterts.User do
     |> unique_constraint(:username, downcase: true)
   end
 
+  def display_name(user) do
+    display_name(user.username, user.name)
+  end
+  defp display_name(_, name) when not is_nil(name) do
+    name
+  end
+  defp display_name(username, _) do
+    username
+  end
+
   @doc """
   Creates a query that orders users by name.
   """

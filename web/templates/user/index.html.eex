@@ -10,7 +10,7 @@
   <tbody>
 <%= for user <- @active_players do %>
     <tr>
-      <td><%= user.name || user.username %></td>
+      <td><%= User.display_name(user) %></td>
 
       <td class="text-right">
         <%= if logged_in?(@conn) do %>
@@ -40,7 +40,7 @@
   <tbody>
 <%= for user <- @inactive_players do %>
     <tr>
-      <td><%= user.name || user.username %></td>
+      <td><%= User.display_name(user) %></td>
 
       <td class="text-right">
         <%= if logged_in?(@conn) do %>

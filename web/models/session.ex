@@ -15,8 +15,8 @@ defmodule Nermesterts.Session do
   end
 
   def current_user_name(conn) do
-    player = current_user(conn)
-    display_name(player)
+    user = current_user(conn)
+    user_display_name(user)
   end
 
   def logged_in?(conn), do: !!current_user(conn)
@@ -28,8 +28,8 @@ defmodule Nermesterts.Session do
     end
   end
 
-  defp display_name(player) when not is_nil(player) do
-    player.name || player.username
+  defp user_display_name(user) when not is_nil(user) do
+    User.display_name(user)
   end
   defp display_name(_) do
     "Guest"
