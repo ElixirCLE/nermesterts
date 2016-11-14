@@ -31,7 +31,7 @@ defmodule Nermesterts.Session do
   defp user_display_name(user) when not is_nil(user) do
     User.display_name(user)
   end
-  defp display_name(_) do
+  defp user_display_name(_) do
     "Guest"
   end
 end
