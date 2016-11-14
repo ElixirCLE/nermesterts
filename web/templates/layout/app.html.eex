@@ -23,6 +23,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <%= current_user_name(@conn) %> <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <%= if logged_in?(@conn) do %>
+                  <li><%= link "Edit", to: user_path(@conn, :edit, current_user(@conn))%></li>
                   <li><%= link "Log Out", to: session_path(@conn, :delete), method: "delete" %></li>
                 <% else %>
                   <li><%= link "Log In", to: session_path(@conn, :new) %></li>
