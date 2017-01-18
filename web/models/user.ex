@@ -2,7 +2,7 @@ defmodule Nermesterts.User do
   use Nermesterts.Web, :model
 
   @required_fields ~w(username)
-  @optional_fields ~w(name active)
+  @optional_fields ~w(name active guest)
 
   schema "users" do
     field :username, :string
@@ -11,6 +11,7 @@ defmodule Nermesterts.User do
     field :password_confirmation, :string, virtual: true
     field :name, :string
     field :active, :boolean, default: false
+    field :guest, :boolean, default: false
 
     belongs_to :role, Nermesterts.Role
 
@@ -59,7 +60,15 @@ defmodule Nermesterts.User do
   """
   def active(query, active) do
     from u in query,
-      where: u.active == ^active
+      where: u.active == ^active and u.guest == false
+  end
+
+  @doc """
+  Returns a query that gets all guest users
+  """
+  def guest(query) do
+    from u in query,
+      where: u.guest == true
   end
 
   defp put_encrypted_pass(changeset) do
