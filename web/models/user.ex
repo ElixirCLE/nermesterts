@@ -12,6 +12,8 @@ defmodule Nermesterts.User do
     field :name, :string
     field :active, :boolean, default: false
 
+    belongs_to :role, Nermesterts.Role
+
     timestamps()
   end
 
