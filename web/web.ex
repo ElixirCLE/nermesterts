@@ -36,6 +36,8 @@ defmodule Nermesterts.Web do
 
       import Nermesterts.Router.Helpers
       import Nermesterts.Gettext
+
+      import Canary.Plugs
     end
   end
 

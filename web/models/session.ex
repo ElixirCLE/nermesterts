@@ -10,8 +10,7 @@ defmodule Nermesterts.Session do
   end
 
   def current_user(conn) do
-    id = Plug.Conn.get_session(conn, :current_user)
-    if id, do: Nermesterts.Repo.get(User, id)
+    conn.assigns[:current_user]
   end
 
   def current_user_name(conn) do

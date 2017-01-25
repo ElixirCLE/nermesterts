@@ -39,7 +39,9 @@ defmodule Nermesterts.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:timex, "~> 3.0"},
-     {:comeonin, "~> 1.0"}]
+     {:comeonin, "~> 1.0"},
+     {:canary, "~> 1.1.0"},
+     {:canada, "~> 1.0.1"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
