@@ -1,9 +1,6 @@
 defmodule Nermesterts.PageController do
   use Nermesterts.Web, :controller
-  alias Nermesterts.Game
-  alias Nermesterts.Phrase
-  alias Nermesterts.User
-  alias Nermesterts.GamePicker
+  alias Nermesterts.{Game, GamePicker, Phrase, User}
 
   def index(conn, _params) do
     games = Repo.all(Game)

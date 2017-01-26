@@ -9,19 +9,27 @@ defmodule Nermesterts.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :authenticate do
+    plug Nermesterts.Plug.Authenticate
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
 
   scope "/", Nermesterts do
-    pipe_through :browser # Use the default browser stack
+    pipe_through :browser
+
+    resources "/registrations", RegistrationController, only: [:new, :create]
+    resources "/login", SessionController, only: [:new, :create]
+  end
+
+  scope "/", Nermesterts do
+    pipe_through [:browser, :authenticate] # Use the default browser stack
 
     get "/", PageController, :index
     post "/", PageController, :post
 
-    resources "/registrations", RegistrationController, only: [:new, :create]
-
-    resources "/login", SessionController, only: [:new, :create]
     delete "/logout", SessionController, :delete
 
     resources "/user", UserController, only: [:edit, :update, :delete]

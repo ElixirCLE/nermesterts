@@ -2,7 +2,9 @@ defmodule Nermesterts.User do
   use Nermesterts.Web, :model
 
   @required_fields ~w(username)
-  @optional_fields ~w(name active guest)
+  @optional_fields ~w(active admin guest name password password_confirmation)
+
+  @required_registration_fields ~w(username password password_confirmation)
 
   schema "users" do
     field :username, :string
@@ -12,19 +14,15 @@ defmodule Nermesterts.User do
     field :name, :string
     field :active, :boolean, default: false
     field :guest, :boolean, default: false
-
-    belongs_to :role, Nermesterts.Role
+    field :admin, :boolean, default: false
 
     timestamps()
   end
 
   def registration_changeset(struct, params) do
     struct
-    |> changeset(params)
-    |> cast(params, ~w(password password_confirmation), [])
-    |> validate_length(:password, min: 6)
-    |> validate_confirmation(:password)
-    |> put_encrypted_pass
+    |> cast(params, @required_registration_fields, @optional_fields)
+    |> common_changeset
   end
 
   @doc """
@@ -33,8 +31,16 @@ defmodule Nermesterts.User do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, @required_fields, @optional_fields)
+    |> common_changeset
+  end
+
+  defp common_changeset(changeset) do
+    changeset
     |> validate_length(:username, min: 3, max: 20)
     |> unique_constraint(:username, downcase: true)
+    |> validate_length(:password, min: 6)
+    |> validate_confirmation(:password)
+    |> put_encrypted_pass
   end
 
   def display_name(user) do

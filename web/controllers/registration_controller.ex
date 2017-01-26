@@ -16,7 +16,7 @@ defmodule Nermesterts.RegistrationController do
       {:ok, changeset} ->
         # sign in
         conn
-        |> put_session(:current_user, changeset.id)
+        |> put_session(:current_user, changeset)
         |> put_flash(:info, "Your account was created")
         |> redirect(to: "/")
       {:error, changeset} ->

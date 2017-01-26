@@ -11,7 +11,7 @@ defmodule Nermesterts.SessionController do
     case Nermesterts.Session.login(session_params, Nermesterts.Repo) do
       {:ok, user} ->
         conn
-        |> put_session(:current_user, user.id)
+        |> put_session(:current_user, user)
         |> put_flash(:info, "Logged in")
         |> redirect(to: page_path(conn, :index))
       :error ->

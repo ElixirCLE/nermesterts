@@ -36,6 +36,8 @@ defmodule Nermesterts.Web do
 
       import Nermesterts.Router.Helpers
       import Nermesterts.Gettext
+
+      import Canary.Plugs
     end
   end
 
@@ -53,8 +55,7 @@ defmodule Nermesterts.Web do
       import Nermesterts.ErrorHelpers
       import Nermesterts.Gettext
 
-      import Nermesterts.Session, only: [current_user: 1, current_user_name: 1, logged_in?: 1]
-
+      import Nermesterts.Session, only: [current_user: 1, current_user_name: 1, is_admin?: 1, logged_in?: 1]
       alias Nermesterts.User
     end
   end

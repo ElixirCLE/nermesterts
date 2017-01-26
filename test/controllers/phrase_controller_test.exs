@@ -1,54 +1,70 @@
 defmodule Nermesterts.PhraseControllerTest do
   use Nermesterts.ConnCase
-
   alias Nermesterts.Phrase
+  import Nermesterts.TestHelper, only: [log_in: 2]
+
   @valid_attrs %{message: "some content"}
   @invalid_attrs %{}
 
-  test "lists all entries on index", %{conn: conn} do
-    conn = get conn, phrase_path(conn, :index)
-    assert html_response(conn, 200) =~ "Listing phrases"
+  test "redirects to sign in page when not logged in", %{conn: conn} do
+    user = insert(:user)
+    conn = get conn, user_path(conn, :edit, user)
+    assert redirected_to(conn) == session_path(conn, :new)
   end
 
-  test "renders form for new resources", %{conn: conn} do
-    conn = get conn, phrase_path(conn, :new)
-    assert html_response(conn, 200) =~ "New phrase"
-  end
+  describe "while authenticated" do
+    setup do
+      user = insert(:user)
+      conn = build_conn()
+              |> log_in(user)
+      {:ok, [conn: conn]}
+    end
 
-  test "creates resource and redirects when data is valid", %{conn: conn} do
-    conn = post conn, phrase_path(conn, :create), phrase: @valid_attrs
-    assert redirected_to(conn) == phrase_path(conn, :index)
-    assert Repo.get_by(Phrase, @valid_attrs)
-  end
+    test "lists all entries on index", %{conn: conn} do
+      conn = get conn, phrase_path(conn, :index)
+      assert html_response(conn, 200) =~ "Listing phrases"
+    end
 
-  test "does not create resource and renders errors when data is invalid", %{conn: conn} do
-    conn = post conn, phrase_path(conn, :create), phrase: @invalid_attrs
-    assert html_response(conn, 200) =~ "New phrase"
-  end
+    test "renders form for new resources", %{conn: conn} do
+      conn = get conn, phrase_path(conn, :new)
+      assert html_response(conn, 200) =~ "New phrase"
+    end
 
-  test "renders form for editing chosen resource", %{conn: conn} do
-    phrase = Repo.insert! %Phrase{}
-    conn = get conn, phrase_path(conn, :edit, phrase)
-    assert html_response(conn, 200) =~ "Edit phrase"
-  end
+    test "creates resource and redirects when data is valid", %{conn: conn} do
+      conn = post conn, phrase_path(conn, :create), phrase: @valid_attrs
+      assert redirected_to(conn) == phrase_path(conn, :index)
+      assert Repo.get_by(Phrase, @valid_attrs)
+    end
 
-  test "updates chosen resource and redirects when data is valid", %{conn: conn} do
-    phrase = Repo.insert! %Phrase{}
-    conn = put conn, phrase_path(conn, :update, phrase), phrase: @valid_attrs
-    assert redirected_to(conn) == phrase_path(conn, :index)
-    assert Repo.get_by(Phrase, @valid_attrs)
-  end
+    test "does not create resource and renders errors when data is invalid", %{conn: conn} do
+      conn = post conn, phrase_path(conn, :create), phrase: @invalid_attrs
+      assert html_response(conn, 200) =~ "New phrase"
+    end
 
-  test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
-    phrase = Repo.insert! %Phrase{}
-    conn = put conn, phrase_path(conn, :update, phrase), phrase: @invalid_attrs
-    assert html_response(conn, 200) =~ "Edit phrase"
-  end
+    test "renders form for editing chosen resource", %{conn: conn} do
+      phrase = Repo.insert! %Phrase{}
+      conn = get conn, phrase_path(conn, :edit, phrase)
+      assert html_response(conn, 200) =~ "Edit phrase"
+    end
 
-  test "deletes chosen resource", %{conn: conn} do
-    phrase = Repo.insert! %Phrase{}
-    conn = delete conn, phrase_path(conn, :delete, phrase)
-    assert redirected_to(conn) == phrase_path(conn, :index)
-    refute Repo.get(Phrase, phrase.id)
+    test "updates chosen resource and redirects when data is valid", %{conn: conn} do
+      phrase = Repo.insert! %Phrase{}
+      conn = put conn, phrase_path(conn, :update, phrase), phrase: @valid_attrs
+      assert redirected_to(conn) == phrase_path(conn, :index)
+      assert Repo.get_by(Phrase, @valid_attrs)
+    end
+
+    test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
+      phrase = Repo.insert! %Phrase{}
+      conn = put conn, phrase_path(conn, :update, phrase), phrase: @invalid_attrs
+      assert html_response(conn, 200) =~ "Edit phrase"
+    end
+
+    test "deletes chosen resource", %{conn: conn} do
+      phrase = Repo.insert! %Phrase{}
+      conn = delete conn, phrase_path(conn, :delete, phrase)
+      assert redirected_to(conn) == phrase_path(conn, :index)
+      refute Repo.get(Phrase, phrase.id)
+    end
   end
 end
