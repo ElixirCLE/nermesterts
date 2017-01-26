@@ -9,8 +9,12 @@ defmodule Nermesterts.Router do
     plug :put_secure_browser_headers
   end
 
-  pipeline :authenticate do
-    plug Nermesterts.Plug.Authenticate
+  pipeline :edit_authenticate do
+    plug Nermesterts.Plug.EditAuthenticate
+  end
+
+  pipeline :view_authenticate do
+    plug Nermesterts.Plug.ViewAuthenticate
   end
 
   pipeline :api do
@@ -25,9 +29,16 @@ defmodule Nermesterts.Router do
   end
 
   scope "/", Nermesterts do
-    pipe_through [:browser, :authenticate] # Use the default browser stack
+    pipe_through [:browser, :view_authenticate]
 
     get "/", PageController, :index
+    get "/games", GameController, :index
+    get "/phrases", PhraseController, :index
+  end
+
+  scope "/", Nermesterts do
+    pipe_through [:browser, :edit_authenticate] # Use the default browser stack
+
     post "/", PageController, :post
 
     delete "/logout", SessionController, :delete
@@ -41,8 +52,8 @@ defmodule Nermesterts.Router do
       put "/deactivate", PlayerController, :deactivate, as: :deactivate
     end
 
-    resources "/games", GameController, except: [:edit, :update]
-    resources "/phrases", PhraseController
+    resources "/games", GameController, except: [:edit, :index, :update]
+    resources "/phrases", PhraseController, except: [:index]
   end
 
   # Other scopes may use custom stacks.

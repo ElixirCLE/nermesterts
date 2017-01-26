@@ -24,4 +24,6 @@
   </tbody>
 </table>
 
-<%= link "New phrase", to: phrase_path(@conn, :new) %>
+<%= if logged_in?(@conn) do %>
+  <%= link "New phrase", to: phrase_path(@conn, :new) %>
+<% end %>
