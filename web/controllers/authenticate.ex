@@ -1,6 +1,6 @@
 defmodule Nermesterts.Plug.Authenticate do
   alias Nermesterts.Router.Helpers, as: Routes
-  alias Nermesterts.User
+  alias Nermesterts.{Repo, User}
   import Plug.Conn
 
   def init(opts) do
@@ -16,6 +16,8 @@ defmodule Nermesterts.Plug.Authenticate do
     assign_current_user(conn, current_user)
   end
   defp assign_current_user(conn, user = %User{}) do
+    # Reload the current user from the database to pick up any changes
+    user = Repo.get!(User, user.id)
     assign(conn, :current_user, user)
   end
   defp assign_current_user(conn, _), do: redirect_to_sign_in(conn)
