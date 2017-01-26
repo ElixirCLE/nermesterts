@@ -26,6 +26,7 @@ defmodule Nermesterts.ConnCase do
       import Ecto.Query
 
       import Nermesterts.Router.Helpers
+      import Nermesterts.Factory
 
       # The default endpoint for testing
       @endpoint Nermesterts.Endpoint
