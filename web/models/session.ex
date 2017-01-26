@@ -20,6 +20,11 @@ defmodule Nermesterts.Session do
 
   def logged_in?(conn), do: !!current_user(conn)
 
+  def is_admin?(conn) do
+    user = current_user(conn)
+    user.admin
+  end
+
   defp authenticate(user, password) do
     case user do
       nil -> false

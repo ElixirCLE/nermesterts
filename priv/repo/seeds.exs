@@ -15,6 +15,8 @@ alias Nermesterts.Phrase
 Nermesterts.Repo.delete_all(Game)
 Nermesterts.Repo.delete_all(Phrase)
 
+Nermesterts.Repo.insert!(%User{username: "admin", password: "password", password_confirmation: "password", name: "Admin"})
+
 Nermesterts.Repo.insert!(%Game{name: "BANG!", min_players: 4, max_players: 7})
 Nermesterts.Repo.insert!(%Game{name: "Betrayal at House on the Hill", min_players: 3, max_players: 6})
 Nermesterts.Repo.insert!(%Game{name: "Boss Monster", min_players: 2, max_players: 4})

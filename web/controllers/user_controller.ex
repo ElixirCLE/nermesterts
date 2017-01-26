@@ -5,7 +5,7 @@ defmodule Nermesterts.UserController do
 
   plug :load_and_authorize_resource, model: User
 
-  def edit(conn, %{"id" => id}) do
+  def edit(conn, _params) do
     if conn.assigns.authorized do
       user = conn.assigns.user
       changeset = User.changeset(user)
@@ -15,7 +15,7 @@ defmodule Nermesterts.UserController do
     end
   end
 
-  def update(conn, %{"id" => id, "user" => user_params}) do
+  def update(conn, %{"user" => user_params}) do
     if conn.assigns.authorized do
       user = conn.assigns.user
       changeset = User.changeset(user, user_params)
@@ -33,7 +33,7 @@ defmodule Nermesterts.UserController do
     end
   end
 
-  def delete(conn, %{"id" => id}) do
+  def delete(conn, _params) do
     if conn.assigns.authorized do
       user = conn.assigns.user
 
