@@ -1,4 +1,4 @@
-defmodule Nermesterts.Plug.Authenticate do
+defmodule Nermesterts.Plug.EditAuthenticate do
   alias Nermesterts.Router.Helpers, as: Routes
   alias Nermesterts.{Repo, User}
   import Plug.Conn

@@ -30,4 +30,6 @@
   </tbody>
 </table>
 
-<%= link "New game", to: game_path(@conn, :new) %>
+<%= if logged_in?(@conn) do %>
+  <%= link "New game", to: game_path(@conn, :new) %>
+<% end %>
