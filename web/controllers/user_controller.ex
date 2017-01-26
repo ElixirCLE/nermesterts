@@ -7,7 +7,7 @@ defmodule Nermesterts.UserController do
 
   def edit(conn, %{"id" => id}) do
     if conn.assigns.authorized do
-      user = conn.assigns.current_user
+      user = conn.assigns.user
       changeset = User.changeset(user)
       render(conn, "edit.html", user: user, changeset: changeset)
     else
@@ -17,7 +17,7 @@ defmodule Nermesterts.UserController do
 
   def update(conn, %{"id" => id, "user" => user_params}) do
     if conn.assigns.authorized do
-      user = conn.assigns.current_user
+      user = conn.assigns.user
       changeset = User.changeset(user, user_params)
 
       case Repo.update(changeset) do
@@ -35,7 +35,7 @@ defmodule Nermesterts.UserController do
 
   def delete(conn, %{"id" => id}) do
     if conn.assigns.authorized do
-      user = conn.assigns.current_user
+      user = conn.assigns.user
 
       # Here we use delete! (with a bang) because we expect
       # it to always work (and if it does not, it will raise).
