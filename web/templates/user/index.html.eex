@@ -18,6 +18,9 @@
             <%= link "Edit", to: user_path(@conn, :edit, user), class: "btn btn-default btn-xs" %>
           <% end %>
           <%= link "Deactivate", to: player_deactivate_path(@conn, :deactivate, user), method: :put, class: "btn btn-default btn-xs" %>
+          <%= if not user.guest and (is_admin?(@conn) or user.id == current_user(@conn).id) do %>
+            <%= link "Delete", to: user_path(@conn, :delete, user), method: :delete, class: "btn btn-danger btn-xs" %>
+          <% end %>
         <% end %>
       </td>
     </tr>
@@ -49,6 +52,9 @@
             <%= link "Edit", to: user_path(@conn, :edit, user), class: "btn btn-default btn-xs" %>
           <% end %>
           <%= link "Activate", to: player_activate_path(@conn, :activate, user), method: :put, class: "btn btn-default btn-xs" %>
+          <%= if not user.guest and (is_admin?(@conn) or user.id == current_user(@conn).id) do %>
+            <%= link "Delete", to: user_path(@conn, :delete, user), method: :delete, class: "btn btn-danger btn-xs" %>
+          <% end %>
         <% end %>
       </td>
     </tr>

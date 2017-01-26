@@ -13,11 +13,11 @@ defmodule Nermesterts.Plug.Authenticate do
 
   defp assign_current_user(conn = %Plug.Conn{}) do
     current_user = conn.assigns[:current_user] || Plug.Conn.get_session(conn, :current_user)
-    assign_current_user(conn, current_user)
+    # Reload the current user from the database to pick up any changes
+    user = Repo.get(User, current_user.id)
+    assign_current_user(conn, user)
   end
   defp assign_current_user(conn, user = %User{}) do
-    # Reload the current user from the database to pick up any changes
-    user = Repo.get!(User, user.id)
     assign(conn, :current_user, user)
   end
   defp assign_current_user(conn, _), do: redirect_to_sign_in(conn)
