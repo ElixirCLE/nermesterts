@@ -25,4 +25,20 @@ defmodule Nermesterts.Factory do
       crypted_password: Comeonin.Bcrypt.hashpwsalt("123456")
     }
   end
+
+  def user_active_factory do
+    %User{
+      username: sequence(:username, &"username #{&1}"),
+      crypted_password: "123456",
+      active: true
+    }
+  end
+
+  def user_guest_factory do
+    %User{
+      username: sequence(:username, &"username #{&1}"),
+      crypted_password: "123456",
+      guest: true
+    }
+  end
 end
