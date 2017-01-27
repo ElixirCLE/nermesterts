@@ -16,7 +16,8 @@
       <td class="text-right">
         <%= if logged_in?(@conn) do %>
           <%= link "Edit", to: phrase_path(@conn, :edit, phrase), class: "btn btn-default btn-xs" %>
-          <%= link "Delete", to: phrase_path(@conn, :delete, phrase), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+          <%= link "Delete", to: phrase_path(@conn, :delete, phrase), method: :delete, class: "btn btn-danger btn-xs",
+                data: [confirm: "Are you sure you want to delete '#{phrase.message |> String.slice(0..19)}'...?"] %>
         <% end %>
       </td>
     </tr>
