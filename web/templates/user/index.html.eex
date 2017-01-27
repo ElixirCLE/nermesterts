@@ -17,7 +17,8 @@
           <%= link "Deactivate", to: player_deactivate_path(@conn, :deactivate, user), method: :put, class: "btn btn-default btn-xs" %>
           <%= if not user.guest and (is_admin?(@conn) or user.id == current_user(@conn).id) do %>
             <%= link "Edit", to: user_path(@conn, :edit, user), class: "btn btn-default btn-xs" %>
-            <%= link "Delete", to: user_path(@conn, :delete, user), method: :delete, class: "btn btn-danger btn-xs" %>
+            <%= link "Delete", to: user_path(@conn, :delete, user), method: :delete, class: "btn btn-danger btn-xs",
+                  data: [confirm: "Are you sure you want to delete #{User.display_name(user)}?"] %>
           <% end %>
         <% end %>
       </td>
@@ -49,7 +50,8 @@
           <%= link "Activate", to: player_activate_path(@conn, :activate, user), method: :put, class: "btn btn-default btn-xs" %>
           <%= if is_admin?(@conn) or user.id == current_user(@conn).id do %>
             <%= link "Edit", to: user_path(@conn, :edit, user), class: "btn btn-default btn-xs" %>
-            <%= link "Delete", to: user_path(@conn, :delete, user), method: :delete, class: "btn btn-danger btn-xs" %>
+            <%= link "Delete", to: user_path(@conn, :delete, user), method: :delete, class: "btn btn-danger btn-xs",
+                  data: [confirm: "Are you sure you want to delete #{User.display_name(user)}?"] %>
           <% end %>
         <% end %>
       </td>
