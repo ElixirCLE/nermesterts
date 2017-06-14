@@ -18,7 +18,7 @@ defmodule Nermesterts.PageController do
     |> Enum.take_random(1)
     |> List.first
 
-    render conn, "index.html", game: game, active_players: active_guest_players, inactive_players: inactive_players, phrase: phrase
+    render conn, :index, game: game, active_players: active_guest_players, inactive_players: inactive_players, phrase: phrase
   end
 
   defp get_game(game, _) when not is_nil(game) do

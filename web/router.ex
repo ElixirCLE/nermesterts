@@ -57,7 +57,9 @@ defmodule Nermesterts.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", Nermesterts do
-  #   pipe_through :api
-  # end
+  scope "/api", Nermesterts do
+    pipe_through :api
+
+    get "/game", PageController, :index
+  end
 end

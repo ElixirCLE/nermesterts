@@ -4,6 +4,13 @@ defmodule Nermesterts.PageView do
   alias Nermesterts.Phrase
   alias Nermesterts.Game
 
+  def render("index.json", %{game: game, active_players: players, inactive_players: _, phrase: _}) do
+    %{
+      game: game.name,
+      num_players: length(players)
+    }
+  end
+
   def selected_game_phrase(%Phrase{message: message, has_token: true}, %Game{name: name}) do
     String.replace(message, "#GAME#", "<h3>" <> name <> "</h3>")
   end
