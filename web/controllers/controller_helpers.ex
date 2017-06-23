@@ -11,7 +11,7 @@ defmodule Nermesterts.ControllerHelpers do
   def handle_resource_not_found(conn) do
     conn
     |> put_status(:not_found)
-    |> render(Neremsterts.ErrorView, "404.html")
+    |> render(Nermesterts.ErrorView, "404.html")
     |> halt
   end
 

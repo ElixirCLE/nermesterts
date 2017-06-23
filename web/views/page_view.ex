@@ -4,10 +4,10 @@ defmodule Nermesterts.PageView do
   alias Nermesterts.Phrase
   alias Nermesterts.Game
 
-  def render("index.json", %{game: game, active_players: players, inactive_players: _, phrase: _}) do
+  def render("index.json", %{game: game, num_players: players, active_players: _, inactive_players: _, phrase: _}) do
     %{
       game: game.name,
-      num_players: length(players)
+      num_players: players
     }
   end
 
