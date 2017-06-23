@@ -2,15 +2,16 @@ defmodule Nermesterts.PageController do
   use Nermesterts.Web, :controller
   alias Nermesterts.{Game, GamePicker, Phrase, PlayedGame, User}
 
-  def index(conn, _params) do
+  def index(conn, params) do
     active_players = User |> User.active(true) |> User.ordered |> Repo.all
     inactive_players = User |> User.active(false) |> User.ordered |> Repo.all
     guest_players = User |> User.guest |> Repo.all
 
     active_guest_players = active_players ++ guest_players
-    num_players = length(active_guest_players)
+    num_players = player_count(params["num_players"], active_guest_players)
 
     played_game = Repo.get_by(PlayedGame, player_count: num_players, year: Timex.today.year, day: Timex.day(Timex.today))
+                  |> Repo.preload(:game)
     game = get_game(played_game, num_players)
     game_is_nil = is_nil(game)
 
@@ -18,7 +19,8 @@ defmodule Nermesterts.PageController do
     |> Enum.take_random(1)
     |> List.first
 
-    render conn, :index, game: game, active_players: active_guest_players, inactive_players: inactive_players, phrase: phrase
+    # Clean this up. Maybe move a lot of this logic into a helper and split the API and Browser code into separate controllers
+    render conn, :index, game: game, num_players: num_players, active_players: active_guest_players, inactive_players: inactive_players, phrase: phrase
   end
 
   defp get_game(game, _) when not is_nil(game) do
@@ -34,6 +36,13 @@ defmodule Nermesterts.PageController do
     |> insert_played_game(num_players)
   end
 
+  defp player_count(num_players, _) when not is_nil(num_players) do
+    String.to_integer num_players
+  end
+  defp player_count(_, player_list) do
+    length(player_list)
+  end
+
   defp filtered_games(prev_game) when not is_nil(prev_game) do
     Repo.all(from g in Game, where: g.id != ^prev_game.game_id)
   end
@@ -42,8 +51,9 @@ defmodule Nermesterts.PageController do
   end
 
   defp insert_played_game(game, num_players) when not is_nil(game) do
-    changeset = PlayedGame.changeset(%PlayedGame{}, %{game_id: game.id, player_count: num_players, year: Timex.today.year, day: Timex.day(Timex.today)})
-    Repo.insert(changeset)
+    PlayedGame.changeset(%PlayedGame{}, %{game_id: game.id, player_count: num_players, year: Timex.today.year, day: Timex.day(Timex.today)})
+    |> Repo.insert
+    game
   end
   defp insert_played_game(_, _) do
     nil
