@@ -11,7 +11,6 @@ defmodule Nermesterts.PageController do
     num_players = player_count(params["num_players"], active_guest_players)
 
     played_game = Repo.get_by(PlayedGame, player_count: num_players, year: Timex.today.year, day: Timex.day(Timex.today))
-                  |> Repo.preload(:game)
     game = get_game(played_game, num_players)
     game_is_nil = is_nil(game)
 
