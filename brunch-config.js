@@ -64,6 +64,14 @@ exports.config = {
   },
 
   npm: {
-    enabled: true
+    enabled: true,
+    globals: {
+      $: 'jquery',
+      jQuery: 'jquery'
+    },
+    styles: {
+      select2: ['dist/css/select2.min.css'],
+      "select2-bootstrap-theme": ['dist/select2-bootstrap.min.css']
+    }
   }
 };

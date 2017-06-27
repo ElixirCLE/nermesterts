@@ -25,6 +25,7 @@ import "phoenix_html"
 import $ from "jquery"
 global.jQuery = require("jquery")
 global.bootstrap = require("bootstrap")
+global.select2 = require("select2")
 
 // Allows delete links to work in Bootstrap dropdowns
 $(document).off('click.bs.dropdown.data-api', '.dropdown form');

@@ -7,7 +7,7 @@
 
   <div class="form-group">
     <%= label f, :name, class: "control-label" %>
-    <%= text_input f, :name, class: "form-control" %>
+    <%= select f, :name, %{}, class: "form-control" %>
     <%= error_tag f, :name %>
   </div>
 
@@ -25,7 +25,8 @@
 
   <div class="form-group">
     <%= label f, :image, class: "control-label" %>
-    <%= text_input f, :image, class: "form-control" %>
+    <img src="#" id="game_image_holder" class="display-none"/>
+    <%= hidden_input f, :image, class: "form-control" %>
     <%= error_tag f, :image %>
   </div>
 
@@ -33,3 +34,49 @@
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+$("#game_name").select2({
+  theme: 'bootstrap',
+  ajax: {
+    url: "/games/search",
+    dataType: 'json',
+    delay: 500,
+    data: function(params) {
+      return {
+        q: params.term, // search term
+      };
+    },
+    processResults: function(data, params) {
+      return {
+        results: data.results,
+        pagination: {
+          more: false
+        }
+      };
+    },
+    cache: true
+  },
+  minimumInputLength: 1
+});
+
+$('#game_name').on('select2:select', function(evt) {
+  $.ajax({
+    url: "/games/search",
+    data: {
+      id: $('#game_name').val()
+    },
+    success: function(data) {
+      result = data.results[0];
+      $('#game_min_players').val(result.min_players);
+      $('#game_max_players').val(result.max_players);
+      $('#game_image').val(result.image);
+
+      imageHolder = $('#game_image_holder');
+      imageHolder.attr('src', result.image);
+      imageHolder.removeClass('display-none');
+      imageHolder.addClass('display-block');
+    }
+  });
+});
+</script>

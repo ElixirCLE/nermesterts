@@ -11,3 +11,20 @@
   text-decoration: none;
   background-color: #f5f5f5;
 }
+
+.display-none {
+  display: none;
+}
+
+.display-block {
+  display: block;
+}
+
+/* Minor selec2 hacks to make rendering match other fields */
+.select2-container .select2-selection--single .select2-selection__rendered {
+  padding-left: 0px;
+}
+
+span.select2-selection.select2-selection--single {
+  height: 34px;
+}
