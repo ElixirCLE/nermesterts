@@ -20,6 +20,14 @@
   display: block;
 }
 
+.table>tbody>tr>td.game-align-center {
+  vertical-align: middle;
+}
+
+.game-thumb {
+  height: 50px;
+}
+
 /* Minor selec2 hacks to make rendering match other fields */
 .select2-container .select2-selection--single .select2-selection__rendered {
   padding-left: 0px;
