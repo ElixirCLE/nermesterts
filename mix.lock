@@ -1,4 +1,4 @@
-%{"boardgamegeek_client": {:git, "https://github.com/ElixirCLE/boardgamegeek_client.git", "1e118dbd826f4fccf861d0642e2570e94367df6b", []},
+%{"boardgamegeek_client": {:git, "https://github.com/ElixirCLE/boardgamegeek_client.git", "1f5b7b4d51e2d19b26c402f4e5b2a42838bbae77", []},
   "canada": {:hex, :canada, "1.0.1", "da96d0ff101a0c2a6cc7b07d92b8884ff6508f058781d3679999416feacf41c5", [:mix], [], "hexpm"},
   "canary": {:hex, :canary, "1.1.1", "4138d5e05db8497c477e4af73902eb9ae06e49dceaa13c2dd9f0b55525ded48b", [:mix], [{:canada, "~> 1.0.1", [hex: :canada, repo: "hexpm", optional: false]}, {:ecto, ">= 1.1.0", [hex: :ecto, repo: "hexpm", optional: false]}, {:plug, "~> 1.0", [hex: :plug, repo: "hexpm", optional: false]}], "hexpm"},
   "certifi": {:hex, :certifi, "1.2.1", "c3904f192bd5284e5b13f20db3ceac9626e14eeacfbb492e19583cf0e37b22be", [:rebar3], [], "hexpm"},
