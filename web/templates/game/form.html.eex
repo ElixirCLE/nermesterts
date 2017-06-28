@@ -7,7 +7,6 @@
 
   <div class="form-group">
     <%= label f, :name, class: "control-label" %>
-    <%= hidden_input f, :name %>
     <%= select f, :select, %{}, class: "form-control" %>
     <%= error_tag f, :name %>
   </div>
@@ -24,11 +23,15 @@
     <%= error_tag f, :max_players %>
   </div>
 
+  <div id="image-section" class="form-group display-none">
+    <%= label f, :image, class: "control-label" %>
+    <%= img_tag "#", id: "game_image_holder", class: "display-block" %>
+  </div>
+
   <div class="form-group">
-    <%= label f, :image, class: "control-label display-none" %>
-    <%= img_tag "#", id: "game_image_holder", class: "display-none" %>
+    <%= hidden_input f, :bgg_id %>
+    <%= hidden_input f, :name %>
     <%= hidden_input f, :image %>
-    <%= error_tag f, :image %>
   </div>
 
   <div class="form-group">
@@ -69,16 +72,15 @@ $('#game_select').on('select2:select', function(evt) {
     },
     success: function(data) {
       result = data.results[0];
+      $('#game_bgg_id').val(result.bgg_id);
+      $('#game_name').val(result.name);
+      $('#game_image').val(result.image);
+
       $('#game_min_players').val(result.min_players);
       $('#game_max_players').val(result.max_players);
-      $('#game_image').val(result.image);
-      $('#game_name').val(result.name);
+      $('#game_image_holder').attr('src', result.image);
 
-      $('label[for="game_image"]').removeClass('display-none');
-      imageHolder = $('#game_image_holder');
-      imageHolder.attr('src', result.image);
-      imageHolder.removeClass('display-none');
-      imageHolder.addClass('display-block');
+      $('#image-section').removeClass('display-none');
     }
   });
 });

@@ -2,6 +2,7 @@ defmodule Nermesterts.Game do
   use Nermesterts.Web, :model
 
   schema "games" do
+    field :bgg_id, :integer
     field :name, :string
     field :min_players, :integer
     field :max_players, :integer
@@ -11,7 +12,7 @@ defmodule Nermesterts.Game do
   end
 
   @required_fields ~w(name min_players max_players)
-  @optional_fields ~w(image)
+  @optional_fields ~w(bgg_id image)
 
   @doc """
   Builds a changeset based on the `struct` and `params`.

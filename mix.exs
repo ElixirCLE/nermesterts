@@ -19,7 +19,7 @@ defmodule Nermesterts.Mixfile do
   def application do
     [mod: {Nermesterts, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :ex_machina, :httpotion]]
+                    :phoenix_ecto, :postgrex, :ex_machina, :httpotion, :boardgamegeek_client]]
   end
 
   # Specifies which paths to compile per environment.
