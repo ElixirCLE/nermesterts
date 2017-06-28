@@ -19,7 +19,7 @@ defmodule Nermesterts.Mixfile do
   def application do
     [mod: {Nermesterts, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :ex_machina]]
+                    :phoenix_ecto, :postgrex, :ex_machina, :httpotion, :boardgamegeek_client]]
   end
 
   # Specifies which paths to compile per environment.
@@ -30,7 +30,8 @@ defmodule Nermesterts.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:canada, "~> 1.0.1"},
+    [{:boardgamegeek_client, git: "https://github.com/ElixirCLE/boardgamegeek_client.git"},
+     {:canada, "~> 1.0.1"},
      {:canary, "~> 1.1.0"},
      {:comeonin, "~> 1.0"},
      {:cowboy, "~> 1.0"},

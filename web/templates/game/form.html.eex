@@ -7,7 +7,7 @@
 
   <div class="form-group">
     <%= label f, :name, class: "control-label" %>
-    <%= text_input f, :name, class: "form-control" %>
+    <%= select f, :select, %{}, class: "form-control" %>
     <%= error_tag f, :name %>
   </div>
 
@@ -23,13 +23,22 @@
     <%= error_tag f, :max_players %>
   </div>
 
-  <div class="form-group">
+  <div id="image-section" class="form-group display-none">
     <%= label f, :image, class: "control-label" %>
-    <%= text_input f, :image, class: "form-control" %>
-    <%= error_tag f, :image %>
+    <%= img_tag "#", id: "game_image_holder", class: "display-block" %>
+  </div>
+
+  <div class="form-group">
+    <%= hidden_input f, :bgg_id %>
+    <%= hidden_input f, :name %>
+    <%= hidden_input f, :image %>
   </div>
 
   <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  gameSelector.init()
+</script>

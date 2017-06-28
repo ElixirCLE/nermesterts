@@ -1,5 +1,6 @@
 defmodule Nermesterts.GameController do
   use Nermesterts.Web, :controller
+  require BoardGameGeekClient
 
   alias Nermesterts.Game
 
@@ -41,5 +42,16 @@ defmodule Nermesterts.GameController do
     conn
     |> put_flash(:info, "Game deleted successfully.")
     |> redirect(to: game_path(conn, :index))
+  end
+
+  def search(conn, %{"q" => query}) do
+    results = BoardGameGeekClient.search_games(query)
+    |> Enum.map(fn %{id: id, name: name} -> %{id: id, text: name} end)
+
+    render conn, "games_search.json", results: results
+  end
+  def search(conn, %{"id" => id}) do
+    result = BoardGameGeekClient.get_games_info([id])
+    render conn, "games_info.json", result: result
   end
 end

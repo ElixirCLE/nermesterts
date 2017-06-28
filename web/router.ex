@@ -52,6 +52,7 @@ defmodule Nermesterts.Router do
       put "/deactivate", PlayerController, :deactivate, as: :deactivate
     end
 
+    get "/games/search", GameController, :search, as: :game_search
     resources "/games", GameController, except: [:edit, :index, :update]
     resources "/phrases", PhraseController, except: [:index]
   end
