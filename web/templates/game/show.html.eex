@@ -1,5 +1,7 @@
 <h2>Show game</h2>
 
+<%= img_tag @game.image %>
+
 <ul>
 
   <li>
@@ -17,10 +19,6 @@
     <%= @game.max_players %>
   </li>
 
-  <li>
-    <strong>Image:</strong>
-    <%= @game.image %>
-  </li>
 
 </ul>
 
