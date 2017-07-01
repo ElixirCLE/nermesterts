@@ -86,7 +86,7 @@ global.gameSelector = new function() {
       }
 
       return "<div class='select2-result-game clearfix'>" +
-               "<span class='select2-result-game-image'><img src='" + game.image + "' width='50'/></span>&nbsp;" +
+               "<span class='select2-result-game-image'><img class='game-thumb' src='" + game.image + "'/></span>&nbsp;" +
                "<span class='select2-result-game-meta inline-block'>" +
                  "<div class='select2-result-game-title'>" + game.name + "</div>" +
                "</span>"+

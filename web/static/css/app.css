@@ -29,7 +29,8 @@
 }
 
 .game-thumb {
-  height: 50px;
+  width: 50px;
+  max-height: 80px;
 }
 
 /* Minor selec2 hacks to make rendering match other fields */
