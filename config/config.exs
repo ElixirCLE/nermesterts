@@ -27,6 +27,7 @@ config :canary,
   not_found_handler: {Nermesterts.ControllerHelpers, :handle_resource_not_found}
 
 config :boardgamegeek_client, :boardgamegeek_api, BoardGameGeek.HTTPClient
+config :boardgamegeek_client, :boardgamegeek_html, BoardGameGeekHTML.HTTPClient
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

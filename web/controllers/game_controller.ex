@@ -46,8 +46,6 @@ defmodule Nermesterts.GameController do
 
   def search(conn, %{"q" => query}) do
     results = BoardGameGeekClient.search_games(query)
-    |> Enum.map(fn %{id: id, name: name} -> %{id: id, text: name} end)
-
     render conn, "games_search.json", results: results
   end
   def search(conn, %{"id" => id}) do
