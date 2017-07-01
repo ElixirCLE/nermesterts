@@ -20,6 +20,10 @@
   display: block;
 }
 
+.inline-block {
+  display: inline-block;
+}
+
 .table>tbody>tr>td.game-align-center {
   vertical-align: middle;
 }

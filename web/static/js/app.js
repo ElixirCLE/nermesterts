@@ -53,7 +53,10 @@ global.gameSelector = new function() {
         },
         cache: true
       },
-      minimumInputLength: 1
+      escapeMarkup: function (markup) { return markup; },
+      minimumInputLength: 1,
+      templateResult: formatGame,
+      templateSelection: formatGameSelection
     });
 
     $('#game_select').on('select2:select', function(evt) {
@@ -76,5 +79,22 @@ global.gameSelector = new function() {
         }
       });
     });
+
+    function formatGame(game) {
+      if (game.loading) {
+        return game.text;
+      }
+
+      return "<div class='select2-result-game clearfix'>" +
+               "<span class='select2-result-game-image'><img src='" + game.image + "' width='50'/></span>&nbsp;" +
+               "<span class='select2-result-game-meta inline-block'>" +
+                 "<div class='select2-result-game-title'>" + game.name + "</div>" +
+               "</span>"+
+             "</div>";
+    };
+
+    function formatGameSelection(game) {
+      return game.name || game.text;
+    }
   };
 };
