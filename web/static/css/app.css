@@ -41,3 +41,32 @@
 span.select2-selection.select2-selection--single {
   height: 34px;
 }
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  background-image: url("/images/grey.png");
+}
+
+/* for high resolution display */
+
+@media only screen and (min--moz-device-pixel-ratio: 2),
+only screen and (-o-min-device-pixel-ratio: 2/1),
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min-device-pixel-ratio: 2) {
+body {
+  background-image: url("/images/grey_@2X.png");
+}
+
+div.container {
+  overflow-y: hidden;
+  min-height: 100%;
+  background-color: white;
+  border-radius: .25rem;
+  box-shadow: 0 1px 0 rgba(0,0,0,.25);
+  border: 1px solid #e8e8e8;
+  padding: 3rem 4rem !important;
+}
