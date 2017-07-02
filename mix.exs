@@ -19,7 +19,8 @@ defmodule Nermesterts.Mixfile do
   def application do
     [mod: {Nermesterts, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :ex_machina, :httpotion, :boardgamegeek_client]]
+                    :phoenix_ecto, :postgrex, :ex_machina, :httpotion, :boardgamegeek_client,
+                    :scout_apm]]
   end
 
   # Specifies which paths to compile per environment.
@@ -43,6 +44,7 @@ defmodule Nermesterts.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:phoenix_pubsub, "~> 1.0"},
      {:postgrex, ">= 0.0.0"},
+     {:scout_apm, "~> 0.0"},
      {:timex, "~> 3.0"}]
   end
 
