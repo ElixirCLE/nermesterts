@@ -83,6 +83,10 @@ nav div.navbar-collapse ul.navbar-right {
   margin-top: 45px;
 }
 
-a.logo {
+.logo {
+  background-image: url("/images/logo.png");
+  background-size: 401px 100px;
   margin-top: 1em;
+  width: 401px;
+  height: 100px;
 }
