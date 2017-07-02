@@ -8,15 +8,17 @@ defmodule Nermesterts.Phrase do
     timestamps()
   end
 
-  @required_fields ~w(message has_token)
-  @optional_fields ~w()
+  @required_fields ~w(message has_token)a
+  @optional_fields ~w()a
+  @all_fields @required_fields ++ @optional_fields
 
   @doc """
   Builds a changeset based on the `struct` and `params`.
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, @required_fields, @optional_fields)
+    |> cast(params, @all_fields)
+    |> validate_required(@required_fields)
     |> generate_has_token
   end
 

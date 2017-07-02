@@ -11,15 +11,17 @@ defmodule Nermesterts.Game do
     timestamps()
   end
 
-  @required_fields ~w(name min_players max_players)
-  @optional_fields ~w(bgg_id image)
+  @required_fields ~w(name min_players max_players)a
+  @optional_fields ~w(bgg_id image)a
+  @all_fields @required_fields ++ @optional_fields
 
   @doc """
   Builds a changeset based on the `struct` and `params`.
   """
   def changeset(struct, params \\ %{}) do
     changeset = struct
-    |> cast(params, @required_fields, @optional_fields)
+    |> cast(params, @all_fields)
+    |> validate_required(@required_fields)
 
     # Pulled this out so that we can access the changes map
     changeset
