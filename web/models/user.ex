@@ -1,12 +1,16 @@
 defmodule Nermesterts.User do
   use Nermesterts.Web, :model
 
+  alias Nermesterts.User
+
   @required_fields ~w(username)a
   @optional_fields ~w(active admin guest name password password_confirmation)a
   @all_fields @required_fields ++ @optional_fields
 
   @required_registration_fields ~w(username password password_confirmation)a
   @all_registration_fields @required_registration_fields ++ @optional_fields
+
+  @guest_creation_fields ~w(crypted_password)a ++ @all_fields
 
   schema "users" do
     field :username, :string
@@ -19,6 +23,14 @@ defmodule Nermesterts.User do
     field :admin, :boolean, default: false
 
     timestamps()
+  end
+
+  def guest_changeset() do
+    uuid = UUID.uuid4(:hex)
+    guest_value = "guest-#{uuid}"
+    params = %{name: "Guest", username: String.slice(guest_value, 0..19),
+      crypted_password: guest_value, active: true, guest: true}
+    cast(%User{}, params, @guest_creation_fields)
   end
 
   def registration_changeset(struct, params) do

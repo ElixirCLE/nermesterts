@@ -2,7 +2,7 @@ defmodule Nermesterts.Session do
   alias Nermesterts.User
 
   def login(params, repo) do
-    user = repo.get_by(User, username: String.downcase(params["username"]))
+    user = repo.get_by(User, username: String.downcase(params["username"]), guest: false)
     case authenticate(user, params["password"]) do
       true -> {:ok, user}
       _ -> :error

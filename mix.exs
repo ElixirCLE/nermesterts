@@ -45,7 +45,8 @@ defmodule Nermesterts.Mixfile do
      {:phoenix_pubsub, "~> 1.0"},
      {:postgrex, ">= 0.0.0"},
      {:scout_apm, "~> 0.0"},
-     {:timex, "~> 3.0"}]
+     {:timex, "~> 3.0"},
+     {:uuid, "~> 1.1"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
