@@ -7,7 +7,7 @@ defmodule Nermesterts.PageViewTest do
 
   @phrase_no_token %Phrase{message: "Name of the game", has_token: false}
   @phrase_with_token %Phrase{message: "Name of the #GAME#", has_token: true}
-  @valid_game %Game{name: "bloopers"}
+  @valid_game %Game{name: "bloopers", image: "url"}
 
   test "nil phrase with no game provided" do
     assert PageView.selected_game_phrase(nil) == ""
@@ -18,7 +18,8 @@ defmodule Nermesterts.PageViewTest do
   end
 
   test "existing phrase with token and game" do
-    assert PageView.selected_game_phrase(@phrase_with_token, @valid_game) == "Name of the <h3>bloopers</h3>"
+    assert PageView.selected_game_phrase(@phrase_with_token, @valid_game) ==
+      "Name of the <h3><img class='game-thumb' src='url'/>&nbsp;bloopers</h3>"
   end
 
   test "existing phrase with token and nil game" do
