@@ -12,10 +12,13 @@
   </head>
 
   <body>
-    <div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills">
+    <nav role="navigation" class="navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <%= link "", to: page_path(@conn, :index), class: "logo navbar-brand" %>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav nav-pills navbar-right">
             <li role="presentation"><%= link "Home", to: page_path(@conn, :index)%></li>
             <li role="presentation"><%= link "Phrases", to: phrase_path(@conn, :index)%></li>
             <li role="presentation"><%= link "Games", to: game_path(@conn, :index)%></li>
@@ -32,10 +35,10 @@
               </ul>
             </li>
           </ul>
-          <ul class="navbar-right nav-pills">
-          </ul>
-        </nav>
-      </header>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
