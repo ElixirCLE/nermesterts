@@ -29,6 +29,7 @@ defmodule Nermesterts.Web do
   def controller do
     quote do
       use Phoenix.Controller
+      use ScoutApm.Instrumentation
 
       alias Nermesterts.Repo
       import Ecto
