@@ -90,3 +90,11 @@ nav div.navbar-collapse ul.navbar-right {
   width: 401px;
   height: 100px;
 }
+
+@media (min-width: 768px) {
+  nav .container {
+    max-width: 1170px;
+  }
+}
+
+
