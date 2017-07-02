@@ -1,10 +1,12 @@
 defmodule Nermesterts.User do
   use Nermesterts.Web, :model
 
-  @required_fields ~w(username)
-  @optional_fields ~w(active admin guest name password password_confirmation)
+  @required_fields ~w(username)a
+  @optional_fields ~w(active admin guest name password password_confirmation)a
+  @all_fields @required_fields ++ @optional_fields
 
-  @required_registration_fields ~w(username password password_confirmation)
+  @required_registration_fields ~w(username password password_confirmation)a
+  @all_registration_fields @required_registration_fields ++ @optional_fields
 
   schema "users" do
     field :username, :string
@@ -21,7 +23,8 @@ defmodule Nermesterts.User do
 
   def registration_changeset(struct, params) do
     struct
-    |> cast(params, @required_registration_fields, @optional_fields)
+    |> cast(params, @all_registration_fields)
+    |> validate_required(@required_registration_fields)
     |> common_changeset
   end
 
@@ -30,7 +33,8 @@ defmodule Nermesterts.User do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, @required_fields, @optional_fields)
+    |> cast(params, @all_fields)
+    |> validate_required(@required_fields)
     |> common_changeset
   end
 
