@@ -10,8 +10,6 @@ defmodule Nermesterts.User do
   @required_registration_fields ~w(username password password_confirmation)a
   @all_registration_fields @required_registration_fields ++ @optional_fields
 
-  @guest_creation_fields ~w(crypted_password)a ++ @all_fields
-
   schema "users" do
     field :username, :string
     field :crypted_password, :string
@@ -29,8 +27,8 @@ defmodule Nermesterts.User do
     uuid = UUID.uuid4(:hex)
     guest_value = "guest-#{uuid}"
     params = %{name: "Guest", username: String.slice(guest_value, 0..19),
-      crypted_password: guest_value, active: true, guest: true}
-    cast(%User{}, params, @guest_creation_fields)
+               active: true, guest: true}
+    cast(%User{}, params, @all_fields)
   end
 
   def registration_changeset(struct, params) do
