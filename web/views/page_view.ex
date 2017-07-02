@@ -11,8 +11,8 @@ defmodule Nermesterts.PageView do
     }
   end
 
-  def selected_game_phrase(%Phrase{message: message, has_token: true}, %Game{name: name}) do
-    String.replace(message, "#GAME#", "<h3>" <> name <> "</h3>")
+  def selected_game_phrase(%Phrase{message: message, has_token: true}, %Game{name: name, image: image}) do
+    String.replace(message, "#GAME#", "<h3><img class='game-thumb' src='" <> image <> "'/>&nbsp;" <> name <> "</h3>")
   end
   def selected_game_phrase(%Phrase{message: _, has_token: true}, _) do
     ""
