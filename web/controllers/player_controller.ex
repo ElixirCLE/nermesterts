@@ -7,10 +7,7 @@ defmodule Nermesterts.PlayerController do
   end
 
   def add_guest(conn, _params) do
-    uuid = Ecto.UUID.generate
-    guest_value = "guest-#{uuid}"
-    changeset = User.registration_changeset(%User{}, %{name: "Guest", username: String.slice(guest_value, 0..19),
-                                            password: guest_value, password_confirmation: guest_value, active: true, guest: true})
+    changeset = User.guest_changeset()
     Repo.insert!(changeset)
 
     conn

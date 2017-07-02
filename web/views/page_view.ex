@@ -1,8 +1,7 @@
 defmodule Nermesterts.PageView do
   use Nermesterts.Web, :view
 
-  alias Nermesterts.Phrase
-  alias Nermesterts.Game
+  alias Nermesterts.{Game, Phrase}
 
   def render("index.json", %{game: game, num_players: players, active_players: _, inactive_players: _, phrase: _}) do
     %{
