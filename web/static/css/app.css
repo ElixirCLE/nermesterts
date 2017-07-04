@@ -62,7 +62,7 @@ body {
   background-image: url("/images/grey_@2X.png");
 }
 
-body > div.container {
+.paneled {
   margin-top: 20px;
   margin-bottom: 20px;
   padding: 3rem 4rem !important;
@@ -72,6 +72,10 @@ body > div.container {
   border-radius: .25rem;
   box-shadow: 0 1px 0 rgba(0,0,0,.25);
   border: 1px solid #e8e8e8;
+}
+
+nav .container {
+  max-width: 1170px;
 }
 
 nav.navbar-default {
@@ -90,11 +94,3 @@ nav div.navbar-collapse ul.navbar-right {
   width: 401px;
   height: 100px;
 }
-
-@media (min-width: 768px) {
-  nav .container {
-    max-width: 1170px;
-  }
-}
-
-
