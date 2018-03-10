@@ -3,7 +3,7 @@ defmodule Nermesterts.GameControllerTest do
   alias Nermesterts.Game
   import Nermesterts.TestHelper, only: [log_in: 2]
 
-  @valid_attrs %{image: "some content", max_players: 42, min_players: 42, name: "some content"}
+  @valid_attrs %{image: "some content", max_players: 42, min_players: 42, name: "some content", bgg_id: 1}
   @invalid_attrs %{}
 
   test "redirects to sign in page when not logged in", %{conn: conn} do
@@ -51,13 +51,6 @@ defmodule Nermesterts.GameControllerTest do
       assert_error_sent 404, fn ->
         get conn, game_path(conn, :show, -1)
       end
-    end
-
-    test "deletes chosen resource", %{conn: conn} do
-      game = Repo.insert! %Game{}
-      conn = delete conn, game_path(conn, :delete, game)
-      assert redirected_to(conn) == game_path(conn, :index)
-      refute Repo.get(Game, game.id)
     end
   end
 end

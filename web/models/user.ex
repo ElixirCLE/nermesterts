@@ -22,6 +22,10 @@ defmodule Nermesterts.User do
     field :guest, :boolean, default: false
     field :admin, :boolean, default: false
 
+    many_to_many :games, Nermesterts.Game, join_through: "user_games",
+      join_keys: [user_id: :id, game_id: :bgg_id], unique: true,
+      on_replace: :delete
+
     timestamps()
   end
 
@@ -54,6 +58,7 @@ defmodule Nermesterts.User do
     changeset
     |> validate_length(:username, min: 3, max: 20)
     |> unique_constraint(:username, downcase: true)
+    |> unique_constraint(:unique_user_games_index)
     |> validate_length(:password, min: 6)
     |> validate_confirmation(:password)
     |> put_encrypted_pass
