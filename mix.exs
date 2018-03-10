@@ -31,7 +31,7 @@ defmodule Nermesterts.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:boardgamegeek_client, git: "https://github.com/ElixirCLE/boardgamegeek_client.git"},
+    [{:boardgamegeek_client, "~> 0.1"},
      {:canada, "~> 1.0.1"},
      {:canary, "~> 1.1.0"},
      {:comeonin, "~> 1.0"},
