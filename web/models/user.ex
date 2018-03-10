@@ -4,7 +4,7 @@ defmodule Nermesterts.User do
   alias Nermesterts.User
 
   @required_fields ~w(username)a
-  @optional_fields ~w(active admin guest name password password_confirmation)a
+  @optional_fields ~w(active admin bgg_username guest name password password_confirmation)a
   @all_fields @required_fields ++ @optional_fields
 
   @required_registration_fields ~w(username password password_confirmation)a
@@ -14,6 +14,7 @@ defmodule Nermesterts.User do
 
   schema "users" do
     field :username, :string
+    field :bgg_username, :string
     field :crypted_password, :string
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
