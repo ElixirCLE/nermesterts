@@ -6,7 +6,7 @@ defmodule Nermesterts.GameController do
   alias Nermesterts.User
 
   def index(conn, _params) do
-    games = Game |> Game.inventory |> Game.ordered |> Repo.all
+    games = Game |> Game.ordered |> Repo.all |> Repo.preload(:users)
     render(conn, "index.html", games: games)
   end
 

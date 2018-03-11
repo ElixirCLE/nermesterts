@@ -94,3 +94,11 @@ nav div.navbar-collapse ul.navbar-right {
   width: 401px;
   height: 100px;
 }
+
+a.help {
+  cursor: help;
+}
+
+div.popover-content ul li {
+  padding-right: 30px;
+}

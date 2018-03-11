@@ -8,4 +8,18 @@ defmodule Nermesterts.GameView do
   def render("games_info.json", %{result: result}) do
     %{results: result}
   end
+
+  def generate_owner_popover(users) do
+    opening = "<a class='help' data-toggle='popover' title='Owners' data-html='true' data-content='<ul>"
+    closing = "</ul>'>" <> "#{length(users)}" <> "</a>"
+
+    opening <> generate_owner_list(users) <> closing
+  end
+
+  defp generate_owner_list([user|users]) do
+    "<li>" <> User.display_name(user) <> "</li>" <> generate_owner_list(users)
+  end
+  defp generate_owner_list([]) do
+    ""
+  end
 end
