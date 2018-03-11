@@ -101,6 +101,6 @@ global.gameSelector = new function() {
 
 global.popoverConfig = new function() {
   this.init = function() {
-    $('[data-toggle="popover"]').popover();
+    $('[rel="tooltip"]').tooltip();
   };
 };
