@@ -13,14 +13,14 @@
     </tr>
   </thead>
   <tbody>
-  <%= for {game, count} <- @games do %>
-    <%= if count > 0 do %>
+  <%= for game <- @games do %>
+    <%= if length(game.users) > 0 do %>
       <tr>
         <td class="game-align-center"><%= img_tag game.image, class: "game-thumb" %></td>
         <td class="game-align-center"><%= game.name %></td>
         <td class="game-align-center"><%= game.min_players %></td>
         <td class="game-align-center"><%= game.max_players %></td>
-        <td class="game-align-center"><%= count %></td>
+        <td class="game-align-center"><%= raw(generate_owner_popover(game.users)) %></td>
 
         <td class="game-align-center text-right">
           <%= if logged_in?(@conn) do %>
@@ -40,3 +40,7 @@
 <%= if logged_in?(@conn) do %>
   <%= link "New game", to: game_path(@conn, :new) %>
 <% end %>
+
+<script type="text/javascript">
+  popoverConfig.init()
+</script>

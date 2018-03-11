@@ -44,12 +44,4 @@ defmodule Nermesterts.Game do
     from g in query,
       order_by: g.name
   end
-
-  def inventory(query) do
-    from g in query,
-      right_join: ug in "user_games", on: [game_id: g.bgg_id],
-      select: {g, count(ug.game_id)},
-      group_by: [g.id, ug.game_id],
-      preload: [:users]
-  end
 end
