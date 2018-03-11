@@ -30,6 +30,8 @@ defmodule Nermesterts.PageController do
     yesterday = Timex.shift(Timex.today, days: -1)
     prev_game = Repo.get_by(PlayedGame, player_count: num_players, year: yesterday.year, day: Timex.day(yesterday))
     games = filtered_games(prev_game)
+            |> Repo.preload(:users)
+            |> Enum.filter(fn(game) -> length(game.users) > 0 end)
 
     GamePicker.pick_game(games, num_players)
     |> insert_played_game(num_players)

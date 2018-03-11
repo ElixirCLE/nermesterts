@@ -14,25 +14,23 @@
   </thead>
   <tbody>
   <%= for game <- @games do %>
-    <%= if length(game.users) > 0 do %>
-      <tr>
-        <td class="game-align-center"><%= img_tag game.image, class: "game-thumb" %></td>
-        <td class="game-align-center"><%= game.name %></td>
-        <td class="game-align-center"><%= game.min_players %></td>
-        <td class="game-align-center"><%= game.max_players %></td>
-        <td class="game-align-center"><%= raw(generate_owner_popover(game.users)) %></td>
+    <tr>
+      <td class="game-align-center"><%= img_tag game.image, class: "game-thumb" %></td>
+      <td class="game-align-center"><%= game.name %></td>
+      <td class="game-align-center"><%= game.min_players %></td>
+      <td class="game-align-center"><%= game.max_players %></td>
+      <td class="game-align-center"><%= raw(generate_owner_popover(game.users)) %></td>
 
-        <td class="game-align-center text-right">
-          <%= if logged_in?(@conn) do %>
-            <%= link "Show", to: game_path(@conn, :show, game), class: "btn btn-default btn-xs" %>
-            <%= if Enum.member?(game.users, current_user(@conn)) do %>
-              <%= link "Delete", to: game_path(@conn, :delete, game), method: :delete, class: "btn btn-danger btn-xs",
-                  data: [confirm: "Are you sure you want to delete #{game.name}?"] %>
-            <% end %>
+      <td class="game-align-center text-right">
+        <%= if logged_in?(@conn) do %>
+          <%= link "Show", to: game_path(@conn, :show, game), class: "btn btn-default btn-xs" %>
+          <%= if Enum.member?(game.users, current_user(@conn)) do %>
+            <%= link "Delete", to: game_path(@conn, :delete, game), method: :delete, class: "btn btn-danger btn-xs",
+                data: [confirm: "Are you sure you want to delete #{game.name}?"] %>
           <% end %>
-        </td>
-      </tr>
-    <% end %>
+        <% end %>
+      </td>
+    </tr>
   <% end %>
   </tbody>
 </table>
