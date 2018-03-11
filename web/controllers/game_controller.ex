@@ -6,7 +6,11 @@ defmodule Nermesterts.GameController do
   alias Nermesterts.User
 
   def index(conn, _params) do
-    games = Game |> Game.ordered |> Repo.all |> Repo.preload(:users)
+    games = Game
+            |> Game.ordered
+            |> Repo.all
+            |> Repo.preload(:users)
+            |> Enum.filter(fn(game) -> length(game.users) > 0 end)
     render(conn, "index.html", games: games)
   end
 
