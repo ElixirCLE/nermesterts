@@ -99,6 +99,8 @@ a.help {
   cursor: help;
 }
 
-div.popover-content ul li {
-  padding-right: 30px;
+ul.tooltip-inner {
+  text-align: left;
+  padding-left: 30px;
+  padding-right: 20px;
 }

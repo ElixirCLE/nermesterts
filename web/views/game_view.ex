@@ -10,7 +10,7 @@ defmodule Nermesterts.GameView do
   end
 
   def generate_owner_popover(users) do
-    opening = "<a class='help' data-toggle='popover' title='Owners' data-html='true' data-content='<ul>"
+    opening = "<a class='help' rel='tooltip' data-html='true' data-original-title='<ul class=\"tooltip-inner\">"
     closing = "</ul>'>" <> "#{length(users)}" <> "</a>"
 
     opening <> generate_owner_list(users) <> closing
