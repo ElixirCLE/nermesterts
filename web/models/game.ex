@@ -8,11 +8,15 @@ defmodule Nermesterts.Game do
     field :max_players, :integer
     field :image, :string
 
+    many_to_many :users, Nermesterts.User, join_through: "user_games",
+      join_keys: [game_id: :bgg_id, user_id: :id], unique: true,
+      on_replace: :delete
+
     timestamps()
   end
 
-  @required_fields ~w(name min_players max_players)a
-  @optional_fields ~w(bgg_id image)a
+  @required_fields ~w(name bgg_id min_players max_players)a
+  @optional_fields ~w(image)a
   @all_fields @required_fields ++ @optional_fields
 
   @doc """
@@ -29,7 +33,8 @@ defmodule Nermesterts.Game do
     |> validate_number(:min_players,
                        less_than_or_equal_to: Map.get(changeset.changes, :max_players),
                        message: "Min players must be less than or equal to the max players.")
-    |> unique_constraint(:name)
+    |> unique_constraint(:bgg_id)
+    |> unique_constraint(:unique_user_games_index)
   end
 
   @doc """
@@ -38,5 +43,13 @@ defmodule Nermesterts.Game do
   def ordered(query) do
     from g in query,
       order_by: g.name
+  end
+
+  def inventory(query) do
+    from g in query,
+      right_join: ug in "user_games", on: [game_id: g.bgg_id],
+      select: {g, count(ug.game_id)},
+      group_by: [g.id, ug.game_id],
+      preload: [:users]
   end
 end

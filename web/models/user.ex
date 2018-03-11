@@ -4,7 +4,7 @@ defmodule Nermesterts.User do
   alias Nermesterts.User
 
   @required_fields ~w(username)a
-  @optional_fields ~w(active admin guest name password password_confirmation)a
+  @optional_fields ~w(active admin bgg_username guest name password password_confirmation)a
   @all_fields @required_fields ++ @optional_fields
 
   @required_registration_fields ~w(username password password_confirmation)a
@@ -14,6 +14,7 @@ defmodule Nermesterts.User do
 
   schema "users" do
     field :username, :string
+    field :bgg_username, :string
     field :crypted_password, :string
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
@@ -21,6 +22,10 @@ defmodule Nermesterts.User do
     field :active, :boolean, default: false
     field :guest, :boolean, default: false
     field :admin, :boolean, default: false
+
+    many_to_many :games, Nermesterts.Game, join_through: "user_games",
+      join_keys: [user_id: :id, game_id: :bgg_id], unique: true,
+      on_replace: :delete
 
     timestamps()
   end
@@ -54,6 +59,7 @@ defmodule Nermesterts.User do
     changeset
     |> validate_length(:username, min: 3, max: 20)
     |> unique_constraint(:username, downcase: true)
+    |> unique_constraint(:unique_user_games_index)
     |> validate_length(:password, min: 6)
     |> validate_confirmation(:password)
     |> put_encrypted_pass
