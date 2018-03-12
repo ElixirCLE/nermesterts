@@ -17,7 +17,9 @@ defmodule Nermesterts.GameView do
   end
 
   defp generate_owner_list([user|users]) do
-    "<li>" <> User.display_name(user) <> "</li>" <> generate_owner_list(users)
+    {:safe, safe_name} = sanitize(User.display_name(user), :strip_tags)
+    {:safe, safe_name} = html_escape(safe_name)
+    "<li>" <> safe_name <> "</li>" <> generate_owner_list(users)
   end
   defp generate_owner_list([]) do
     ""

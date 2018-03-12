@@ -51,6 +51,7 @@ defmodule Nermesterts.Web do
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
+      use PhoenixHtmlSanitizer, :basic_html
 
       import Nermesterts.Router.Helpers
       import Nermesterts.ErrorHelpers
