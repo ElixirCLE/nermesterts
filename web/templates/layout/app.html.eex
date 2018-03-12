@@ -23,7 +23,7 @@
             <li role="presentation"><%= link "Phrases", to: phrase_path(@conn, :index)%></li>
             <li role="presentation"><%= link "Games", to: game_path(@conn, :index)%></li>
             <li class="dropdown" role="presentation">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <%= current_user_name(@conn) %> <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-html="true" data-toggle="dropdown"> <%= sanitize(current_user_name(@conn)) %> <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <%= if logged_in?(@conn) do %>
                   <li><%= link "Edit", to: user_path(@conn, :edit, current_user(@conn))%></li>
