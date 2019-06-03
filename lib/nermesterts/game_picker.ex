@@ -25,10 +25,11 @@ defmodule Nermesterts.GamePicker do
       iex> Nermesterts.GamePicker.pick_game(games, 1)
       nil
   """
-  def pick_game(games_list, num_players, randomizer \\ GamePicker.Randomizer) do
+  def pick_game(games_list, _num_players, randomizer \\ GamePicker.Randomizer) do
     games_list
-    |> filter_min_players(num_players)
-    |> filter_max_players(num_players)
+    |> Enum.filter(fn(game) -> Map.get(game, :name) == "Secret Hitler" end)
+    # |> filter_min_players(num_players)
+    # |> filter_max_players(num_players)
     |> randomizer.randomize
   end
 
